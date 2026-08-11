@@ -14,7 +14,7 @@ import ChannelTransition from '@/components/tv/ChannelTransition';
 // Channel Content Components
 import AboutChannel from '@/components/channels/AboutChannel';
 import ProjectsChannel from '@/components/channels/ProjectsChannel';
-import LabChannel from '@/components/channels/LabChannel';
+import WorkshopChannel from '@/components/channels/WorkshopChannel';
 import SkillsChannel from '@/components/channels/SkillsChannel';
 import JourneyChannel from '@/components/channels/JourneyChannel';
 import ArchiveChannel from '@/components/channels/ArchiveChannel';
@@ -23,7 +23,7 @@ import ContactChannel from '@/components/channels/ContactChannel';
 const programSchedules = [
   { time: '11:30 AM', title: 'ON AIR PROFILE', channel: 1 },
   { time: '12:00 PM', title: 'PROJECT TRANSMISSIONS', channel: 2 },
-  { time: '12:30 PM', title: 'RESEARCH FEEDS', channel: 3 },
+  { time: '12:30 PM', title: 'TEJA WORKSHOP', channel: 3 },
   { time: '01:00 PM', title: 'PROVEN SKILLSETS', channel: 4 },
   { time: '01:30 PM', title: 'DOCUMENTARY SERIES', channel: 5 },
   { time: '02:00 PM', title: 'RETRO ARCHIVE FEEDS', channel: 6 },
@@ -104,7 +104,7 @@ export default function Home() {
         setDynamicProgramText('PROJECT TRANSMISSIONS');
         break;
       case 3:
-        setDynamicProgramText('RESEARCH FEEDS');
+        setDynamicProgramText('BUILDING IN PROGRESS');
         break;
       case 4:
         setDynamicProgramText('PROVEN SKILLSETS');
@@ -315,7 +315,7 @@ export default function Home() {
           />
         );
       case 3:
-        return <LabChannel />;
+        return <WorkshopChannel />;
       case 4:
         return <SkillsChannel onNavigateToProject={handleNavigateToProject} />;
       case 5:
@@ -402,7 +402,7 @@ export default function Home() {
           channelTitle={
             channel === 1 ? 'ABOUT' :
             channel === 2 ? 'PROJECTS' :
-            channel === 3 ? 'LAB' :
+            channel === 3 ? 'WORKSHOP' :
             channel === 4 ? 'SKILLS' :
             channel === 5 ? 'JOURNEY' :
             channel === 6 ? 'ARCHIVE' :
@@ -432,7 +432,7 @@ export default function Home() {
         <ChannelNav currentChannel={channel} onChannelChange={changeChannel} />
 
         {/* Bottom marquee ticker */}
-        <BroadcastTicker />
+        <BroadcastTicker channel={channel} />
       </TvShell>
 
       {/* 5. Virtual floating remote control controller */}

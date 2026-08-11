@@ -42,8 +42,8 @@ export default function BroadcastHeader({
       case 2: // Projects
       case 4: // Skills
         return { label: 'SIGNAL: STABLE', color: 'text-[#00D9FF]' };
-      case 3: // Lab
-        return { label: 'SIGNAL: EXPERIMENTAL', color: 'text-yellow-500 animate-pulse' };
+      case 3: // Workshop
+        return { label: 'SIGNAL: ACTIVE DEVELOPMENT', color: 'text-[#00D9FF] font-bold' };
       case 5: // Journey
         return { label: 'SIGNAL: TRANSMITTING', color: 'text-cyan-400' };
       case 6: // Archive
