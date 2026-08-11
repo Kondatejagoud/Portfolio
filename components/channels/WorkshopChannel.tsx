@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { projectsData } from '@/data/projects';
 import { workshopActivities, buildProcess } from '@/data/workshop';
-import { Terminal, Calendar, Code, BookOpen, Layers, AlertTriangle, ArrowRight, ExternalLink } from 'lucide-react';
+import { Terminal, Calendar, Code, BookOpen, Layers, ArrowRight, ExternalLink } from 'lucide-react';
 
 interface WorkshopChannelProps {
   onNavigateToProject?: (projectId: string) => void;
@@ -56,7 +56,6 @@ export default function WorkshopChannel({ onNavigateToProject }: WorkshopChannel
   // Load other categories
   const techNotes = workshopActivities.filter(act => act.category === 'technical-note');
   const lessons = workshopActivities.filter(act => act.category === 'lesson');
-  const troubleshootingLogs = workshopActivities.filter(act => act.category === 'problem');
   const learningTopics = workshopActivities.filter(act => act.category === 'learning');
 
   return (
@@ -346,39 +345,7 @@ export default function WorkshopChannel({ onNavigateToProject }: WorkshopChannel
             </div>
           </section>
 
-          {/* 8. Things That Broke // Troubleshooting Logs (Restored & Project-Aware) */}
-          <section className="flex flex-col gap-3 bg-[#0D1013] border border-zinc-800/60 p-4 rounded-lg">
-            <span className="text-[10px] text-red-500 tracking-wider uppercase font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5 select-none">
-              <AlertTriangle size={12} className="animate-pulse" />
-              THINGS THAT BROKE // TROUBLESHOOTING LOGS
-            </span>
-            <div className="flex flex-col gap-4">
-              {troubleshootingLogs.map((prob) => {
-                const proj = projectsData.find(p => p.id === prob.projectId);
-                return (
-                  <div key={prob.id} className="bg-[#080A0C] border border-zinc-900/85 rounded p-3.5 flex flex-col gap-2">
-                    <div className="flex justify-between items-center border-b border-zinc-900/60 pb-1.5 select-none">
-                      {proj && (
-                        <span className="text-[10px] text-[#00D9FF] font-bold tracking-wider">
-                          PROJECT // {proj.title}
-                        </span>
-                      )}
-                      <span className="text-green-400 border border-green-950 bg-green-950/20 px-2 py-0.5 rounded text-[9px] font-bold font-mono">
-                        {prob.status}
-                      </span>
-                    </div>
-                    <div className="text-xs flex flex-col gap-2 font-sans select-text">
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-[9px] text-[#8D969D] font-bold font-mono uppercase">PROBLEM ENCOUNTERED</span>
-                        <p className="text-zinc-300 italic">{prob.title}</p>
-                      </div>
-                      <p className="text-zinc-500 leading-relaxed text-[11px]">{prob.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
+
 
           {/* 9. Currently Learning */}
           <section className="flex flex-col gap-3 bg-[#0D1013] border border-zinc-800/60 p-4 rounded-lg select-none">

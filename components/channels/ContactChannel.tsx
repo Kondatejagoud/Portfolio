@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Send, FileDown, Terminal, CheckCircle2 } from 'lucide-react';
+import { Send, FileDown, Terminal, CheckCircle2, AlertCircle } from 'lucide-react';
 import { siteConfig } from '@/data/site';
 
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -39,7 +39,7 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export default function ContactChannel() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<'IDLE' | 'SENDING' | 'SUCCESS'>('IDLE');
+  const [status, setStatus] = useState<'IDLE' | 'SENDING' | 'SUCCESS' | 'ERROR'>('IDLE');
   const [logs, setLogs] = useState<string[]>([]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -54,78 +54,85 @@ export default function ContactChannel() {
     setStatus('SENDING');
     setLogs([]);
 
-    const logSteps = [
-      "RESOLVING GATEWAY COGNITIVE NODE...",
-      "ACQUIRING ENCRYPTION SYMMETRIC KEYS...",
-      "ESTABLISHING SECURE TUNNEL TO TEJA SERVER...",
-      "COMPILING PAYLOAD STRUCT...",
-      "SHIPPING PACKET BUFFER...",
-    ];
+    try {
+      const logSteps = [
+        "INITIALIZING SECURE LOGICAL ROUTER...",
+        "COMPILING SENDER DATA PACKET STRUCTURE...",
+        "OPENING CLIENT-SIDE MAIL INTEGRATOR...",
+      ];
 
-    // Simulate retro terminal logs
-    for (let i = 0; i < logSteps.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 300));
-      setLogs(prev => [...prev, `[LOG] ${logSteps[i]}`]);
+      // Simulate step-by-step logs for telemetry aesthetic
+      for (let i = 0; i < logSteps.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 300));
+        setLogs(prev => [...prev, `[LOG] ${logSteps[i]}`]);
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      // Build genuine mailto trigger link
+      const mailtoUrl = `mailto:${siteConfig.email}?subject=TEJA NETWORK Transmission from ${encodeURIComponent(
+        formData.name
+      )}&body=Sender Email: ${encodeURIComponent(formData.email)}%0A%0AMessage:%0A${encodeURIComponent(
+        formData.message
+      )}`;
+
+      // Open mail client
+      window.location.href = mailtoUrl;
+
+      setLogs(prev => [...prev, "[OK] TRANSMISSION COMPLETED. MAIL CLIENT DELEGATION SECURED."]);
+      setStatus('SUCCESS');
+      setFormData({ name: '', email: '', message: '' });
+    } catch {
+      setLogs(prev => [...prev, "[ERR] ROUTING INTEGRITY FAILED. EXITED WITH ERROR."]);
+      setStatus('ERROR');
     }
-
-    await new Promise(resolve => setTimeout(resolve, 400));
-    setLogs(prev => [...prev, "[OK] TRANSMISSION COMPLETED SUCCESSFULLY. EXITED WITH CODE 0."]);
-    
-    setStatus('SUCCESS');
-    setFormData({ name: '', email: '', message: '' });
   };
-
-  // Helper to check and generate link styles/attributes
-  const getLinkProps = (url: string | undefined) => {
-    const isConfigured = !!url;
-    return {
-      href: isConfigured ? url : undefined,
-      onClick: isConfigured ? undefined : (e: React.MouseEvent) => e.preventDefault(),
-      className: `flex items-center justify-between p-4 bg-[#0D1013] border rounded-lg transition-all text-xs font-mono uppercase font-bold select-none ${
-        isConfigured
-          ? 'border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] group cursor-pointer'
-          : 'border-zinc-900/60 text-[#8D969D]/40 opacity-60 cursor-not-allowed'
-      }`,
-      label: isConfigured ? 'CONNECT' : 'STATUS: LINK NOT CONFIGURED',
-      sublabel: isConfigured ? 'RETRIEVE' : 'STATUS: LINK NOT CONFIGURED'
-    };
-  };
-
-  const gitProps = getLinkProps(siteConfig.github);
-  const liProps = getLinkProps(siteConfig.linkedin);
-  const resProps = getLinkProps(siteConfig.resume);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 font-mono select-none">
+    <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 font-mono select-text selection:bg-[#00D9FF] selection:text-black">
+      
       {/* Channel Header */}
-      <div className="border-b border-zinc-800/80 pb-3">
+      <div className="border-b border-zinc-800/80 pb-3 select-none">
         <span className="text-[10px] text-[#8D969D] uppercase tracking-widest block mb-1">
-          CH 07 // OPEN CONNECTION
+          CH 06 // OPEN CONNECTION
         </span>
         <h1 className="text-xl md:text-2xl font-extrabold text-[#E6E8EA] tracking-wider uppercase">
           TRANSMIT SIGNAL
         </h1>
+        <p className="text-[11px] text-[#8D969D] font-sans leading-relaxed mt-1 max-w-lg select-text">
+          Have a project, opportunity, idea, or question? Open a connection and send a transmission.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Terminal Connection Form (takes 7 cols on lg) */}
+        
+        {/* Terminal Connection Form (Left Column, 7 cols on lg) */}
         <div className="lg:col-span-7 bg-[#0D1013] border border-zinc-800/85 rounded-lg overflow-hidden flex flex-col">
-          {/* Window Header */}
-          <div className="bg-[#101317] border-b border-zinc-800/80 px-4 py-2 flex justify-between items-center text-[10px] text-[#8D969D]">
+          {/* Window Header - Sanitized title */}
+          <div className="bg-[#101317] border-b border-zinc-800/80 px-4 py-2 flex justify-between items-center text-[10px] text-[#8D969D] select-none">
             <span className="flex items-center gap-2">
               <Terminal size={12} className="text-[#00D9FF]" />
-              TEJA_BROADCAST_TERMINAL.EXE
+              TRANSMISSION INTERFACE
             </span>
-            <span>PORT: 8080 // SECURE</span>
+            <span className="text-cyan-400 font-bold">OPEN CONNECTION // SECURE CHANNEL</span>
           </div>
 
           <div className="p-4 md:p-5 flex flex-col gap-4">
-            {status !== 'SUCCESS' ? (
+            
+            {/* Short Personal Prompt */}
+            <div className="text-xs text-zinc-300 font-sans leading-relaxed select-text border-b border-zinc-900 pb-3">
+              <span className="block font-mono text-[10px] font-bold text-[#00D9FF] uppercase tracking-wider mb-1">
+                Open a connection.
+              </span>
+              I&apos;m interested in building useful software, learning from difficult problems, and connecting with people working on interesting ideas.
+            </div>
+
+            {status !== 'SUCCESS' && status !== 'ERROR' ? (
               <form onSubmit={executeTransmission} className="flex flex-col gap-4">
                 <div className="flex flex-col md:flex-row gap-4">
                   {/* Name Input */}
                   <div className="flex-1 flex flex-col gap-1.5">
-                    <label htmlFor="name-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold">
+                    <label htmlFor="name-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold select-none">
                       SENDER NAME
                     </label>
                     <input
@@ -135,14 +142,14 @@ export default function ContactChannel() {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="ENTER NAME..."
+                      placeholder="ENTER YOUR NAME..."
                       className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text"
                     />
                   </div>
 
                   {/* Email Input */}
                   <div className="flex-1 flex flex-col gap-1.5">
-                    <label htmlFor="email-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold">
+                    <label htmlFor="email-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold select-none">
                       SENDER EMAIL
                     </label>
                     <input
@@ -152,7 +159,7 @@ export default function ContactChannel() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="ENTER EMAIL..."
+                      placeholder="ENTER YOUR EMAIL..."
                       className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text"
                     />
                   </div>
@@ -160,7 +167,7 @@ export default function ContactChannel() {
 
                 {/* Message Input */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold">
+                  <label htmlFor="message-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold select-none">
                     SIGNAL PAYLOAD MESSAGE
                   </label>
                   <textarea
@@ -170,7 +177,7 @@ export default function ContactChannel() {
                     rows={4}
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="ENTER SIGNAL MESSAGE..."
+                    placeholder="WRITE YOUR MESSAGE..."
                     className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all resize-none select-text"
                   />
                 </div>
@@ -188,20 +195,20 @@ export default function ContactChannel() {
                   </span>
                 </button>
               </form>
-            ) : (
-              // Success terminal result
+            ) : status === 'SUCCESS' ? (
+              /* Success Telemetry Feedback */
               <div className="flex flex-col items-center justify-center py-6 text-center gap-4 animate-fade-in select-text">
-                <CheckCircle2 size={48} className="text-[#00D9FF] animate-bounce" />
+                <CheckCircle2 size={40} className="text-[#00D9FF] animate-bounce" />
                 <div className="flex flex-col gap-1">
                   <h2 className="text-sm font-extrabold text-[#E6E8EA]">
-                    TRANSMISSION RECEIVED.
+                    TRANSMISSION ROUTED.
                   </h2>
                   <span className="text-xs text-[#00D9FF] font-bold">
-                    BROADCAST STATUS: DELIVERED
+                    STATUS: DELEGATED TO MAIL CLIENT
                   </span>
                 </div>
                 <p className="text-xs text-[#8D969D] max-w-sm font-sans">
-                  Your message packet has been routed successfully. Teja will respond shortly.
+                  Your local email client has been triggered to send this transmission. Direct email: <strong className="text-zinc-300 font-mono select-all font-bold">{siteConfig.email}</strong>
                 </p>
                 <button
                   onClick={() => setStatus('IDLE')}
@@ -210,13 +217,35 @@ export default function ContactChannel() {
                   OPEN NEW CONNECTION
                 </button>
               </div>
+            ) : (
+              /* Error telemetry message */
+              <div className="flex flex-col items-center justify-center py-6 text-center gap-4 animate-fade-in select-text">
+                <AlertCircle size={40} className="text-red-500 animate-pulse" />
+                <div className="flex flex-col gap-1">
+                  <h2 className="text-sm font-extrabold text-[#E6E8EA] uppercase">
+                    TRANSMISSION FAILED.
+                  </h2>
+                  <span className="text-xs text-red-500 font-bold">
+                    STATUS: DISPATCH ERROR
+                  </span>
+                </div>
+                <p className="text-xs text-[#8D969D] max-w-sm font-sans">
+                  Unable to establish connection. Please transmit directly via your local mail system to: <strong className="text-zinc-300 font-mono select-all font-bold">{siteConfig.email}</strong>
+                </p>
+                <button
+                  onClick={() => setStatus('IDLE')}
+                  className="mt-2 px-4 py-2 bg-[#080A0C] border border-zinc-800 hover:border-zinc-700 rounded text-[10px] text-[#8D969D] hover:text-[#E6E8EA] cursor-pointer"
+                >
+                  RETRY CONNECTION
+                </button>
+              </div>
             )}
 
             {/* Terminal logs block */}
             {logs.length > 0 && (
-              <div className="bg-[#080A0C] border border-zinc-900 rounded p-3 text-[10px] text-zinc-550 font-mono flex flex-col gap-1 max-h-32 overflow-y-auto">
+              <div className="bg-[#080A0C] border border-zinc-900 rounded p-3 text-[10px] text-zinc-550 font-mono flex flex-col gap-1 max-h-32 overflow-y-auto select-text">
                 {logs.map((log, idx) => (
-                  <div key={idx} className={log.startsWith('[OK]') ? 'text-[#00D9FF]' : ''}>
+                  <div key={idx} className={log.startsWith('[OK]') ? 'text-[#00D9FF]' : log.startsWith('[ERR]') ? 'text-red-500' : ''}>
                     {log}
                   </div>
                 ))}
@@ -225,83 +254,176 @@ export default function ContactChannel() {
           </div>
         </div>
 
-        {/* Directory Links (takes 5 cols on lg) */}
-        <div className="lg:col-span-5 flex flex-col gap-4 font-bold select-none">
-          <span className="text-[10px] text-[#00D9FF] tracking-wider uppercase">
-            EXTERNAL ROUTE NETWORKS
-          </span>
+        {/* Directory Links & Status Board (Right Column, 5 cols on lg) */}
+        <div className="lg:col-span-5 flex flex-col gap-6">
+          
+          {/* Direct Connections List */}
+          <div className="flex flex-col gap-3.5">
+            <span className="text-[10px] text-[#00D9FF] tracking-wider uppercase font-bold select-none">
+              DIRECT CONNECTIONS
+            </span>
 
-          <div className="flex flex-col gap-3">
-            {/* Github */}
-            <a
-              href={gitProps.href}
-              target={gitProps.href ? "_blank" : undefined}
-              rel={gitProps.href ? "noopener noreferrer" : undefined}
-              onClick={gitProps.onClick}
-              className={gitProps.className}
-            >
-              <div className="flex items-center gap-3">
-                <GithubIcon className="w-[18px] h-[18px]" />
-                <div className="flex flex-col">
-                  <span className="text-xs">GITHUB</span>
-                  <span className="text-[9px] text-[#8D969D] font-normal uppercase">
-                    {siteConfig.github ? 'github.com/Kondatejagoud' : 'UNCONFIGURED'}
+            <div className="flex flex-col gap-3">
+              {/* GitHub Link */}
+              {siteConfig.github ? (
+                <a
+                  href={siteConfig.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  aria-label="Open Konda Teja's GitHub profile in a new tab"
+                >
+                  <div className="flex items-center gap-3">
+                    <GithubIcon className="w-[18px] h-[18px]" />
+                    <div className="flex flex-col">
+                      <span className="text-xs">GITHUB</span>
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                        github.com/Kondatejagoud
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                    VIEW SOURCE
                   </span>
+                </a>
+              ) : (
+                <div className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-900/60 text-[#8D969D]/40 opacity-60 rounded-lg text-xs font-mono uppercase font-bold">
+                  <div className="flex items-center gap-3">
+                    <GithubIcon className="w-[18px] h-[18px]" />
+                    <span>GITHUB</span>
+                  </div>
+                  <span className="text-[9px]">NOT CONFIGURED</span>
                 </div>
-              </div>
-              <span className={`text-[9px] ${siteConfig.github ? 'group-hover:text-[#00D9FF]' : 'text-red-500/60'}`}>
-                {gitProps.label}
-              </span>
-            </a>
+              )}
 
-            {/* LinkedIn */}
-            <a
-              href={liProps.href}
-              target={liProps.href ? "_blank" : undefined}
-              rel={liProps.href ? "noopener noreferrer" : undefined}
-              onClick={liProps.onClick}
-              className={liProps.className}
-            >
-              <div className="flex items-center gap-3">
-                <LinkedinIcon className="w-[18px] h-[18px]" />
-                <div className="flex flex-col">
-                  <span className="text-xs">LINKEDIN</span>
-                  <span className="text-[9px] text-[#8D969D] font-normal uppercase">
-                    {siteConfig.linkedin ? 'linkedin.com/in/teja' : 'UNCONFIGURED'}
+              {/* LinkedIn Link */}
+              {siteConfig.linkedin ? (
+                <a
+                  href={siteConfig.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  aria-label="Open Konda Teja's LinkedIn profile in a new tab"
+                >
+                  <div className="flex items-center gap-3">
+                    <LinkedinIcon className="w-[18px] h-[18px]" />
+                    <div className="flex flex-col">
+                      <span className="text-xs">LINKEDIN</span>
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                        linkedin.com/in/konda-teja
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                    CONNECT
                   </span>
+                </a>
+              ) : (
+                <div className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-900/60 text-[#8D969D]/40 opacity-60 rounded-lg text-xs font-mono uppercase font-bold">
+                  <div className="flex items-center gap-3">
+                    <LinkedinIcon className="w-[18px] h-[18px]" />
+                    <div className="flex flex-col">
+                      <span>LINKEDIN</span>
+                      <span className="text-[9.5px] text-[#8D969D]/30 font-normal lowercase">
+                        {"// not configured"}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-[9px]">NOT CONFIGURED</span>
                 </div>
-              </div>
-              <span className={`text-[9px] ${siteConfig.linkedin ? 'group-hover:text-[#00D9FF]' : 'text-red-500/60'}`}>
-                {liProps.label}
-              </span>
-            </a>
+              )}
 
-            {/* Resume Download */}
-            <a
-              href={resProps.href}
-              target={resProps.href ? "_blank" : undefined}
-              rel={resProps.href ? "noopener noreferrer" : undefined}
-              onClick={siteConfig.resume ? resProps.onClick : (e) => {
-                e.preventDefault();
-                alert('RESUME SOURCE LINK NOT CONFIGURED IN DATA/SITE.TS.');
-              }}
-              className={resProps.className}
-            >
-              <div className="flex items-center gap-3">
-                <FileDown size={18} />
-                <div className="flex flex-col">
-                  <span className="text-xs">DOWNLOAD RESUME</span>
-                  <span className="text-[9px] text-[#8D969D] font-normal uppercase">
-                    {siteConfig.resume ? 'PDF DOCUMENT' : 'UNCONFIGURED'}
+              {/* Direct Email Link */}
+              {siteConfig.email ? (
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  aria-label="Open email client to message Konda Teja"
+                >
+                  <div className="flex items-center gap-3">
+                    <Terminal size={18} className="text-[#8D969D] group-hover:text-[#00D9FF]" />
+                    <div className="flex flex-col">
+                      <span className="text-xs">EMAIL Channel</span>
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                        {siteConfig.email}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                    SEND EMAIL
                   </span>
+                </a>
+              ) : (
+                <div className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-900/60 text-[#8D969D]/40 opacity-60 rounded-lg text-xs font-mono uppercase font-bold">
+                  <div className="flex items-center gap-3">
+                    <Terminal size={18} />
+                    <span>EMAIL</span>
+                  </div>
+                  <span className="text-[9px]">NOT CONFIGURED</span>
                 </div>
-              </div>
-              <span className={`text-[9px] ${siteConfig.resume ? 'group-hover:text-[#00D9FF]' : 'text-red-500/60'}`}>
-                {resProps.sublabel}
-              </span>
-            </a>
+              )}
+
+              {/* Resume Link - Hides if unconfigured, as requested */}
+              {siteConfig.resume && (
+                <a
+                  href={siteConfig.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  aria-label="View Konda Teja's resume in a new tab"
+                >
+                  <div className="flex items-center gap-3">
+                    <FileDown size={18} />
+                    <div className="flex flex-col">
+                      <span className="text-xs">RESUME</span>
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                        PDF DOCUMENT
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                    VIEW RESUME
+                  </span>
+                </a>
+              )}
+            </div>
           </div>
+
+          {/* Connection Status Board */}
+          <div className="flex flex-col gap-3.5 select-none">
+            <span className="text-[10px] text-[#8D969D] tracking-wider uppercase font-bold">
+              CONNECTION STATUS
+            </span>
+            <div className="bg-[#0D1013] border border-zinc-900 p-4 rounded-lg flex flex-col gap-2.5 text-xs text-zinc-300">
+              <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
+                <span>EMAIL CHANNEL</span>
+                <span className={siteConfig.email ? 'text-green-400' : 'text-zinc-650'}>
+                  {siteConfig.email ? '● AVAILABLE' : '● OFFLINE'}
+                </span>
+              </div>
+              <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
+                <span>GITHUB NET</span>
+                <span className={siteConfig.github ? 'text-cyan-400 font-bold' : 'text-zinc-650'}>
+                  {siteConfig.github ? '● ONLINE' : '● OFFLINE'}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>LINKEDIN INDEX</span>
+                <span className={siteConfig.linkedin ? 'text-cyan-400 font-bold' : 'text-zinc-650'}>
+                  {siteConfig.linkedin ? '● ONLINE' : '● NOT CONFIGURED'}
+                </span>
+              </div>
+              {siteConfig.resume && (
+                <div className="flex justify-between items-center border-t border-zinc-900 pt-2">
+                  <span>RESUME SHEET</span>
+                  <span className="text-green-400">● AVAILABLE</span>
+                </div>
+              )}
+            </div>
+          </div>
+
         </div>
+
       </div>
     </div>
   );

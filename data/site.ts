@@ -6,8 +6,8 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  github: "", // Empty string means unconfigured
-  linkedin: "", // Empty string means unconfigured
-  email: "", // Empty string means unconfigured
-  resume: "", // Empty string means unconfigured
+  github: "https://github.com/Kondatejagoud",
+  linkedin: "", // Unconfigured by default, will display as 'NOT CONFIGURED'
+  email: "kondateja888@gmail.com",
+  resume: "", // Unconfigured by default, button will be hidden
 };
