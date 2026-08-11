@@ -7,7 +7,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   github: "https://github.com/Kondatejagoud",
-  linkedin: "", // Unconfigured by default, will display as 'NOT CONFIGURED'
-  email: "kondateja888@gmail.com",
+  linkedin: "https://www.linkedin.com/in/kondateja06/",
+  email: "kondatejagoud@gmail.com",
   resume: "", // Unconfigured by default, button will be hidden
 };
