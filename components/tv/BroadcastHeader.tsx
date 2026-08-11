@@ -65,8 +65,8 @@ export default function BroadcastHeader({
           <span className="font-extrabold tracking-widest text-[#E6E8EA] text-sm md:text-base glitch-text">
             TEJA NETWORK
           </span>
-          <span className="text-[9px] text-[#8D969D] tracking-wider uppercase">
-            Personal Broadcast Node
+          <span className="text-[9px] text-[#8D969D] tracking-wider uppercase font-bold">
+            KONDA TEJA // PERSONAL BROADCAST
           </span>
         </div>
       </div>

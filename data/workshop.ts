@@ -49,25 +49,19 @@ export const developmentLogs: DevelopmentLog[] = [
   {
     date: "11 AUG 2026",
     project: "TEJA NETWORK",
-    change: "Refined project architecture, replaced the episode-based project system with a program-based project structure, and transitioned Lab to Workshop.",
-    status: "COMPLETED"
-  },
-  {
-    date: "10 AUG 2026",
-    project: "JARVIS",
-    change: "Integrated SQLite and ChromaDB context matching to resolve vector search accuracy issues.",
+    change: "Refined the portfolio architecture, replaced the episode-based project structure with a program-based system, and redesigned the Workshop around real development activity.",
     status: "COMPLETED"
   },
   {
     date: "08 AUG 2026",
     project: "FAKE NEWS DETECTION",
-    change: "Refactored stylometrics model preprocessing and added Wikidata API retrieval fallbacks.",
+    change: "Refined preprocessing and evidence retrieval components.",
     status: "COMPLETED"
   },
   {
-    date: "01 AUG 2026",
+    date: "05 AUG 2026",
     project: "NETWORK ANOMALY DETECTION",
-    change: "Calibrated packet clustering parameters and tested PCA performance limits.",
+    change: "Improved the anomaly detection pipeline and reviewed PCA/DBSCAN processing.",
     status: "COMPLETED"
   }
 ];
@@ -127,11 +121,10 @@ export const problems: BrokenThing[] = [
 
 export const buildProcess = [
   "IDEA",
-  "PROBLEM",
-  "RESEARCH",
-  "ARCHITECTURE",
-  "IMPLEMENTATION",
-  "TESTING",
-  "ITERATION",
-  "DEPLOYMENT"
+  "UNDERSTAND",
+  "BUILD",
+  "TEST",
+  "DEBUG",
+  "IMPROVE",
+  "DEPLOY"
 ];

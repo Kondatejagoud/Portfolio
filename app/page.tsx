@@ -354,8 +354,8 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-0.5 text-xs text-[#8D969D] border-y border-zinc-900 py-4 w-full">
-              <div>COMPUTER SCIENCE RESEARCH</div>
-              <div className="text-[#00D9FF] font-semibold">AI / SYSTEMS / SOFTWARE</div>
+              <div>KONDA TEJA // PERSONAL BROADCAST</div>
+              <div className="text-[#00D9FF] font-semibold">AI • SOFTWARE • SYSTEMS</div>
             </div>
 
             <div className="text-xs md:text-sm text-zinc-300 italic max-w-xs font-sans leading-relaxed">

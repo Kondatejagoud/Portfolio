@@ -74,7 +74,7 @@ TOOLS / ACTIONS`,
   {
     id: "network-anomaly",
     programNumber: "PROGRAM 003",
-    title: "NETWORK ANOMALY DETECTION",
+    title: "NETWORK TRAFFIC ANOMALY DETECTION",
     subtitle: "UNSUPERVISED MACHINE LEARNING SYSTEM",
     description: "An unsupervised machine learning pipeline for identifying anomalous network traffic and outlier patterns.",
     status: "COMPLETED",
