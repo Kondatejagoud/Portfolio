@@ -6,10 +6,9 @@ import {
   developmentLogs, 
   technicalNotes, 
   learning, 
-  problems, 
   buildProcess 
 } from '@/data/workshop';
-import { Terminal, Calendar, Code, AlertTriangle, BookOpen, Layers, CheckCircle2 } from 'lucide-react';
+import { Terminal, Calendar, Code, BookOpen, Layers, CheckCircle2 } from 'lucide-react';
 
 export default function WorkshopChannel() {
   return (
@@ -76,41 +75,7 @@ export default function WorkshopChannel() {
             )}
           </section>
 
-          {/* 5. Things That Broke (Troubleshooting Logs) */}
-          <section className="flex flex-col gap-3 bg-[#0D1013] border border-zinc-800/60 p-4 rounded-lg">
-            <span className="text-[10px] text-red-500 tracking-wider uppercase font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5 animate-pulse select-none">
-              <AlertTriangle size={12} />
-              THINGS THAT BROKE // TROUBLESHOOTING LOGS
-            </span>
-            <div className="flex flex-col gap-4">
-              {problems.map((prob, idx) => (
-                <div key={idx} className="bg-[#080A0C] border border-zinc-900/85 rounded p-3.5 flex flex-col gap-2.5">
-                  <div className="flex justify-between items-center border-b border-zinc-900/60 pb-1.5 select-none">
-                    <span className="text-[10px] text-[#00D9FF] font-bold tracking-wider">
-                      PROJECT // {prob.project}
-                    </span>
-                    <span className="text-green-400 border border-green-950 bg-green-950/20 px-2 py-0.5 rounded text-[9px] font-bold font-mono">
-                      {prob.status}
-                    </span>
-                  </div>
-                  <div className="text-xs flex flex-col gap-2.5 font-sans">
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[9px] text-[#8D969D] font-bold font-mono uppercase">PROBLEM ENCOUNTERED</span>
-                      <p className="text-zinc-300 italic">{prob.problem}</p>
-                    </div>
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[9px] text-[#8D969D] font-bold font-mono uppercase">ROOT CAUSE</span>
-                      <p className="text-[#8D969D]">{prob.cause}</p>
-                    </div>
-                    <div className="flex flex-col gap-0.5 bg-[#0D1013] border border-zinc-900 p-2.5 rounded font-mono text-[11px] text-zinc-300">
-                      <span className="text-[9px] text-[#00D9FF] font-bold uppercase block mb-1">TAKEAWAY LESSON</span>
-                      &ldquo;{prob.lesson}&rdquo;
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+
 
           {/* 6. Build Flow Process */}
           <section className="flex flex-col gap-3 bg-[#0D1013] border border-zinc-800/60 p-4 rounded-lg select-none">
