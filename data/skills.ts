@@ -11,13 +11,13 @@ export const skillsData: Skill[] = [
     name: "Python",
     category: "PROGRAMMING",
     description: "Primary language used for machine learning pipelines, local AI execution scripts, Web APIs, and automation routines.",
-    projectIds: ["jarvis", "hybrid-detector", "network-anomaly"]
+    projectIds: ["jarvis", "network-anomaly", "fake-news"]
   },
   {
     name: "Java",
     category: "PROGRAMMING",
     description: "Used for object-oriented systems design, backend services, and university coursework in algorithms.",
-    projectIds: []
+    projectIds: ["studymate", "smartclass-room"]
   },
   {
     name: "C",
@@ -36,32 +36,32 @@ export const skillsData: Skill[] = [
     name: "REST APIs",
     category: "BACKEND",
     description: "Architectural style for designing networked applications, mapping out endpoints, and communication payloads.",
-    projectIds: ["jarvis", "hybrid-detector"]
+    projectIds: ["jarvis", "studymate", "smartclass-room"]
   },
   {
     name: "SQLite",
     category: "BACKEND",
     description: "Self-contained, serverless relational database engine used for local application storage.",
-    projectIds: ["jarvis"]
+    projectIds: ["jarvis", "studymate"]
   },
   {
     name: "SQL",
     category: "BACKEND",
     description: "Structured query language for managing data in relational databases, indexing, and optimizing queries.",
-    projectIds: ["jarvis"]
+    projectIds: ["jarvis", "studymate", "smartclass-room"]
   },
   // Machine Learning
   {
     name: "Scikit-learn",
     category: "MACHINE_LEARNING",
     description: "Tools for predictive data analysis, model fitting, preprocessing, and classification pipelines.",
-    projectIds: ["hybrid-detector", "network-anomaly"]
+    projectIds: ["network-anomaly", "fake-news"]
   },
   {
     name: "Pandas",
     category: "MACHINE_LEARNING",
     description: "Data manipulation library for loading, cleaning, transforming, and analyzing tabular datasets.",
-    projectIds: ["network-anomaly"]
+    projectIds: ["network-anomaly", "fake-news"]
   },
   {
     name: "NumPy",
@@ -92,19 +92,19 @@ export const skillsData: Skill[] = [
     name: "Git",
     category: "TOOLS",
     description: "Distributed version control system to track changes in source code during software development.",
-    projectIds: ["jarvis", "hybrid-detector", "network-anomaly"]
+    projectIds: ["jarvis", "studymate", "network-anomaly", "smartclass-room", "fake-news"]
   },
   {
     name: "GitHub",
     category: "TOOLS",
     description: "Hosting service for Git repositories, facilitating collaboration, issue tracking, and CI/CD pipelines.",
-    projectIds: ["jarvis", "hybrid-detector", "network-anomaly"]
+    projectIds: ["jarvis", "studymate", "network-anomaly", "smartclass-room", "fake-news"]
   },
   {
     name: "VS Code",
     category: "TOOLS",
     description: "Primary editor for writing, debugging, and running full-stack software applications.",
-    projectIds: ["jarvis", "hybrid-detector", "network-anomaly"]
+    projectIds: ["jarvis", "studymate", "network-anomaly", "smartclass-room", "fake-news"]
   },
   {
     name: "Linux",

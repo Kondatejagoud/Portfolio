@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Send, FileDown, Terminal, CheckCircle2 } from 'lucide-react';
+import { siteConfig } from '@/data/site';
 
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -74,25 +75,45 @@ export default function ContactChannel() {
     setFormData({ name: '', email: '', message: '' });
   };
 
+  // Helper to check and generate link styles/attributes
+  const getLinkProps = (url: string | undefined) => {
+    const isConfigured = !!url;
+    return {
+      href: isConfigured ? url : undefined,
+      onClick: isConfigured ? undefined : (e: React.MouseEvent) => e.preventDefault(),
+      className: `flex items-center justify-between p-4 bg-[#0D1013] border rounded-lg transition-all text-xs font-mono uppercase font-bold select-none ${
+        isConfigured
+          ? 'border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] group cursor-pointer'
+          : 'border-zinc-900/60 text-[#8D969D]/40 opacity-60 cursor-not-allowed'
+      }`,
+      label: isConfigured ? 'CONNECT' : 'STATUS: LINK NOT CONFIGURED',
+      sublabel: isConfigured ? 'RETRIEVE' : 'STATUS: LINK NOT CONFIGURED'
+    };
+  };
+
+  const gitProps = getLinkProps(siteConfig.github);
+  const liProps = getLinkProps(siteConfig.linkedin);
+  const resProps = getLinkProps(siteConfig.resume);
+
   return (
     <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 font-mono select-none">
       {/* Channel Header */}
       <div className="border-b border-zinc-800/80 pb-3">
-        <span className="text-[10px] text-[#777777] uppercase tracking-widest block mb-1">
+        <span className="text-[10px] text-[#8D969D] uppercase tracking-widest block mb-1">
           CH 07 // OPEN CONNECTION
         </span>
-        <h1 className="text-xl md:text-2xl font-extrabold text-[#F2F2F2] tracking-wider uppercase">
-          OPEN CONNECTION // TRANSMIT SIGNAL
+        <h1 className="text-xl md:text-2xl font-extrabold text-[#E6E8EA] tracking-wider uppercase">
+          TRANSMIT SIGNAL
         </h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Terminal Connection Form (takes 7 cols on lg) */}
-        <div className="lg:col-span-7 bg-[#0E0E0E] border border-zinc-800 rounded-lg overflow-hidden flex flex-col">
+        <div className="lg:col-span-7 bg-[#0D1013] border border-zinc-800/85 rounded-lg overflow-hidden flex flex-col">
           {/* Window Header */}
-          <div className="bg-[#151515] border-b border-zinc-800 px-4 py-2 flex justify-between items-center text-xs text-zinc-500">
+          <div className="bg-[#101317] border-b border-zinc-800/80 px-4 py-2 flex justify-between items-center text-[10px] text-[#8D969D]">
             <span className="flex items-center gap-2">
-              <Terminal size={12} className="text-[#00E5FF]" />
+              <Terminal size={12} className="text-[#00D9FF]" />
               TEJA_BROADCAST_TERMINAL.EXE
             </span>
             <span>PORT: 8080 // SECURE</span>
@@ -104,7 +125,7 @@ export default function ContactChannel() {
                 <div className="flex flex-col md:flex-row gap-4">
                   {/* Name Input */}
                   <div className="flex-1 flex flex-col gap-1.5">
-                    <label htmlFor="name-input" className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">
+                    <label htmlFor="name-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold">
                       SENDER NAME
                     </label>
                     <input
@@ -115,13 +136,13 @@ export default function ContactChannel() {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="ENTER NAME..."
-                      className="bg-black border border-zinc-800 rounded p-2.5 text-xs text-zinc-300 placeholder-zinc-700 focus:outline-none focus:border-[#00E5FF] transition-all select-text"
+                      className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text"
                     />
                   </div>
 
                   {/* Email Input */}
                   <div className="flex-1 flex flex-col gap-1.5">
-                    <label htmlFor="email-input" className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">
+                    <label htmlFor="email-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold">
                       SENDER EMAIL
                     </label>
                     <input
@@ -132,14 +153,14 @@ export default function ContactChannel() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="ENTER EMAIL..."
-                      className="bg-black border border-zinc-800 rounded p-2.5 text-xs text-zinc-300 placeholder-zinc-700 focus:outline-none focus:border-[#00E5FF] transition-all select-text"
+                      className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text"
                     />
                   </div>
                 </div>
 
                 {/* Message Input */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message-input" className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold">
+                  <label htmlFor="message-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold">
                     SIGNAL PAYLOAD MESSAGE
                   </label>
                   <textarea
@@ -149,15 +170,15 @@ export default function ContactChannel() {
                     rows={4}
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="ENTER MESSAGE DETAILED DOSSIER..."
-                    className="bg-black border border-zinc-800 rounded p-2.5 text-xs text-zinc-300 placeholder-zinc-700 focus:outline-none focus:border-[#00E5FF] transition-all resize-none select-text"
+                    placeholder="ENTER SIGNAL MESSAGE..."
+                    className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all resize-none select-text"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={status === 'SENDING'}
-                  className={`w-full py-3 bg-[#0E0E0E] hover:bg-zinc-900 border border-zinc-800 rounded hover:border-[#00E5FF] transition-all cursor-pointer font-bold text-xs text-zinc-300 hover:text-[#00E5FF] flex items-center justify-center gap-2 ${
+                  className={`w-full py-3 bg-[#080A0C] hover:bg-[#0D1013] border border-zinc-800 rounded hover:border-[#00D9FF] transition-all cursor-pointer font-bold text-xs text-[#E6E8EA] hover:text-[#00D9FF] flex items-center justify-center gap-2 ${
                     status === 'SENDING' ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                 >
@@ -170,21 +191,21 @@ export default function ContactChannel() {
             ) : (
               // Success terminal result
               <div className="flex flex-col items-center justify-center py-6 text-center gap-4 animate-fade-in select-text">
-                <CheckCircle2 size={48} className="text-[#00E5FF] animate-bounce" />
+                <CheckCircle2 size={48} className="text-[#00D9FF] animate-bounce" />
                 <div className="flex flex-col gap-1">
-                  <h2 className="text-sm font-extrabold text-[#F2F2F2]">
+                  <h2 className="text-sm font-extrabold text-[#E6E8EA]">
                     TRANSMISSION RECEIVED.
                   </h2>
-                  <span className="text-xs text-[#00E5FF] font-bold">
+                  <span className="text-xs text-[#00D9FF] font-bold">
                     BROADCAST STATUS: DELIVERED
                   </span>
                 </div>
-                <p className="text-xs text-[#777777] max-w-sm font-sans">
+                <p className="text-xs text-[#8D969D] max-w-sm font-sans">
                   Your message packet has been routed successfully. Teja will respond shortly.
                 </p>
                 <button
                   onClick={() => setStatus('IDLE')}
-                  className="mt-2 px-4 py-2 bg-zinc-950 border border-zinc-850 hover:border-zinc-700 rounded text-[10px] text-zinc-400 hover:text-[#F2F2F2] cursor-pointer"
+                  className="mt-2 px-4 py-2 bg-[#080A0C] border border-zinc-800 hover:border-zinc-700 rounded text-[10px] text-[#8D969D] hover:text-[#E6E8EA] cursor-pointer"
                 >
                   OPEN NEW CONNECTION
                 </button>
@@ -193,9 +214,9 @@ export default function ContactChannel() {
 
             {/* Terminal logs block */}
             {logs.length > 0 && (
-              <div className="bg-black border border-zinc-900 rounded p-3 text-[10px] text-zinc-500 font-mono flex flex-col gap-1 max-h-32 overflow-y-auto">
+              <div className="bg-[#080A0C] border border-zinc-900 rounded p-3 text-[10px] text-zinc-550 font-mono flex flex-col gap-1 max-h-32 overflow-y-auto">
                 {logs.map((log, idx) => (
-                  <div key={idx} className={log.startsWith('[OK]') ? 'text-[#00E5FF]' : ''}>
+                  <div key={idx} className={log.startsWith('[OK]') ? 'text-[#00D9FF]' : ''}>
                     {log}
                   </div>
                 ))}
@@ -206,62 +227,78 @@ export default function ContactChannel() {
 
         {/* Directory Links (takes 5 cols on lg) */}
         <div className="lg:col-span-5 flex flex-col gap-4 font-bold select-none">
-          <span className="text-[10px] text-[#00E5FF] tracking-wider uppercase">
+          <span className="text-[10px] text-[#00D9FF] tracking-wider uppercase">
             EXTERNAL ROUTE NETWORKS
           </span>
 
           <div className="flex flex-col gap-3">
             {/* Github */}
             <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 bg-[#0E0E0E] border border-zinc-850 hover:border-[#00E5FF] rounded-lg transition-all text-zinc-300 hover:text-[#00E5FF] group cursor-pointer"
+              href={gitProps.href}
+              target={gitProps.href ? "_blank" : undefined}
+              rel={gitProps.href ? "noopener noreferrer" : undefined}
+              onClick={gitProps.onClick}
+              className={gitProps.className}
             >
               <div className="flex items-center gap-3">
                 <GithubIcon className="w-[18px] h-[18px]" />
                 <div className="flex flex-col">
                   <span className="text-xs">GITHUB</span>
-                  <span className="text-[9px] text-zinc-600 font-normal">github.com/teja-builder</span>
+                  <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                    {siteConfig.github ? 'github.com/Kondatejagoud' : 'UNCONFIGURED'}
+                  </span>
                 </div>
               </div>
-              <span className="text-[9px] text-zinc-700 group-hover:text-[#00E5FF]">CONNECT</span>
+              <span className={`text-[9px] ${siteConfig.github ? 'group-hover:text-[#00D9FF]' : 'text-red-500/60'}`}>
+                {gitProps.label}
+              </span>
             </a>
 
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 bg-[#0E0E0E] border border-zinc-850 hover:border-[#00E5FF] rounded-lg transition-all text-zinc-300 hover:text-[#00E5FF] group cursor-pointer"
+              href={liProps.href}
+              target={liProps.href ? "_blank" : undefined}
+              rel={liProps.href ? "noopener noreferrer" : undefined}
+              onClick={liProps.onClick}
+              className={liProps.className}
             >
               <div className="flex items-center gap-3">
                 <LinkedinIcon className="w-[18px] h-[18px]" />
                 <div className="flex flex-col">
                   <span className="text-xs">LINKEDIN</span>
-                  <span className="text-[9px] text-zinc-600 font-normal">linkedin.com/in/teja-systems</span>
+                  <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                    {siteConfig.linkedin ? 'linkedin.com/in/teja' : 'UNCONFIGURED'}
+                  </span>
                 </div>
               </div>
-              <span className="text-[9px] text-zinc-700 group-hover:text-[#00E5FF]">CONNECT</span>
+              <span className={`text-[9px] ${siteConfig.linkedin ? 'group-hover:text-[#00D9FF]' : 'text-red-500/60'}`}>
+                {liProps.label}
+              </span>
             </a>
 
             {/* Resume Download */}
             <a
-              href="#" // Mock click download
-              onClick={(e) => {
+              href={resProps.href}
+              target={resProps.href ? "_blank" : undefined}
+              rel={resProps.href ? "noopener noreferrer" : undefined}
+              onClick={siteConfig.resume ? resProps.onClick : (e) => {
                 e.preventDefault();
-                alert('RESUME DOWNLOADING... (MOCK COMPILING PAYLOAD)');
+                alert('RESUME SOURCE LINK NOT CONFIGURED IN DATA/SITE.TS.');
               }}
-              className="flex items-center justify-between p-4 bg-[#0E0E0E] border border-zinc-850 hover:border-[#00E5FF] rounded-lg transition-all text-zinc-300 hover:text-[#00E5FF] group cursor-pointer"
+              className={resProps.className}
             >
               <div className="flex items-center gap-3">
                 <FileDown size={18} />
                 <div className="flex flex-col">
                   <span className="text-xs">DOWNLOAD RESUME</span>
-                  <span className="text-[9px] text-zinc-600 font-normal">PDF // MOCK COMPILED</span>
+                  <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                    {siteConfig.resume ? 'PDF DOCUMENT' : 'UNCONFIGURED'}
+                  </span>
                 </div>
               </div>
-              <span className="text-[9px] text-zinc-700 group-hover:text-[#00E5FF]">RETRIEVE</span>
+              <span className={`text-[9px] ${siteConfig.resume ? 'group-hover:text-[#00D9FF]' : 'text-red-500/60'}`}>
+                {resProps.sublabel}
+              </span>
             </a>
           </div>
         </div>

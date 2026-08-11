@@ -1,143 +1,151 @@
-export interface Episode {
+export interface Project {
   id: string;
+  programNumber: string;
   title: string;
+  subtitle: string;
+  description: string;
+  status: 'LIVE' | 'ACTIVE' | 'COMPLETED' | 'EXPERIMENTAL' | 'ARCHIVED';
+  category: string;
+  technologies: string[];
   objective: string;
   problem: string;
   approach: string;
-  technologies: string[];
   architecture?: string;
-  status: 'ACTIVE' | 'DEVELOPMENT' | 'COMPLETE' | 'RETIRED';
-  lessonsLearned: string;
-}
-
-export interface Project {
-  id: string;
-  title: string;
-  tagline: string;
-  status: 'ACTIVE' | 'DEVELOPMENT' | 'COMPLETE' | 'RETIRED';
-  season: string;
-  summary: string;
-  demoUrl?: string;
-  reportUrl?: string;
-  sourceCodeUrl?: string;
-  episodes: Episode[];
+  implementation?: string;
+  results?: string;
+  lessons: string;
+  links: {
+    sourceCode?: string;
+    liveDemo?: string;
+    technicalReport?: string;
+  };
+  featured: boolean;
+  screenshots?: string[];
 }
 
 export const projectsData: Project[] = [
   {
     id: "jarvis",
+    programNumber: "PROGRAM 001",
     title: "JARVIS",
-    tagline: "LOCAL AI ASSISTANT",
+    subtitle: "LOCAL AI ASSISTANT",
+    description: "A privacy-focused, offline-first personal AI assistant designed around local inference, voice interaction, memory and tool execution.",
     status: "ACTIVE",
-    season: "SEASON 01",
-    summary: "An autonomous offline-first AI assistant integrated with local files, speech-to-text, and conversational memory.",
-    demoUrl: "#",
-    reportUrl: "#",
-    sourceCodeUrl: "https://github.com",
-    episodes: [
-      {
-        id: "ep-01",
-        title: "EP 01 — INITIAL IDEA",
-        objective: "Build a privacy-preserving assistant running 100% locally.",
-        problem: "Cloud-based AI assistants suffer from network latency and privacy concerns regarding personal data processing.",
-        approach: "Utilize lightweight open-source Large Language Models running locally via Llama.cpp and expose them through a clean local REST API.",
-        technologies: ["Python", "Llama.cpp", "GGUF Models"],
-        architecture: "User -> local CLI -> Llama.cpp backend -> Local model inference",
-        status: "COMPLETE",
-        lessonsLearned: "Local inference is highly dependent on hardware memory bandwidth. Choosing the right quantization level (e.g. Q4_K_M) is critical for speed."
-      },
-      {
-        id: "ep-02",
-        title: "EP 02 — VOICE INTERFACE",
-        objective: "Enable hands-free natural voice interaction.",
-        problem: "Standard wake-word systems are resource-intensive or require external API connections.",
-        approach: "Implement OpenAI's Whisper model locally for transcription and combined it with an offline Text-to-Speech engine.",
-        technologies: ["Python", "Whisper", "Pyttsx3", "SoundDevice"],
-        architecture: "Audio Input -> SoundDevice capture -> Whisper Transcribe -> LLM -> Pyttsx3 TTS -> Audio Out",
-        status: "COMPLETE",
-        lessonsLearned: "Handling audio silence detection and buffering correctly avoids clipping words at the beginning and end of sentences."
-      },
-      {
-        id: "ep-03",
-        title: "EP 03 — MEMORY SYSTEM",
-        objective: "Allow the assistant to remember details across sessions.",
-        problem: "LLM context windows are limited and lose details when restarts or long periods occur.",
-        approach: "Implement a hybrid memory architecture combining semantic retrieval (Vector Database) and structured metadata stores.",
-        technologies: ["Python", "SQLite", "ChromaDB", "SentenceTransformers"],
-        architecture: "User Input -> Vector Search (ChromaDB) + Sqlite metadata -> Embed into LLM Context -> Response",
-        status: "COMPLETE",
-        lessonsLearned: "Direct database storage is great for facts, but vector search is necessary to retrieve concepts based on conversational semantic intent."
-      },
-      {
-        id: "ep-04",
-        title: "EP 04 — BACKEND ARCHITECTURE",
-        objective: "Expose assistant functions to multiple frontend client interfaces.",
-        problem: "Monolithic scripts were hard to test, scale, and connect to other UI clients (like web pages or terminal widgets).",
-        approach: "Refactor the assistant as a modular FastAPI web service with asynchronous routing, WebSocket support for streaming, and clean JSON endpoints.",
-        technologies: ["FastAPI", "Uvicorn", "WebSockets", "Pydantic"],
-        architecture: "HTTP Client / WebSocket CLI -> FastAPI Controller -> Core Orchestration Layer -> (Whisper / SQLite / LLM Engine)",
-        status: "COMPLETE",
-        lessonsLearned: "Async request handling in FastAPI prevents UI blocking during heavy model inference runs."
-      },
-      {
-        id: "ep-05",
-        title: "EP 05 — CURRENT VERSION",
-        objective: "Synchronize all systems and run continuous local agents.",
-        problem: "The system runs sequentially; we need active agents that can perform periodic tasks like checking calendar entries and alerting the user.",
-        approach: "Establish background task loops utilizing asyncio in python, integrated with local SQLite scheduler tables.",
-        technologies: ["Python", "FastAPI", "SQLite", "Asyncio"],
-        architecture: "Async Event Loop -> Scheduler -> Agent Task Queue -> Execution -> Speech Notification",
-        status: "ACTIVE",
-        lessonsLearned: "Careful locks are required when writing to SQLite databases from concurrent background tasks."
-      }
-    ]
+    category: "Artificial Intelligence",
+    technologies: ["Python", "FastAPI", "SQLite", "Llama.cpp", "Whisper", "ChromaDB"],
+    objective: "Build a privacy-preserving assistant running 100% locally on personal hardware.",
+    problem: "Cloud-based AI assistants suffer from network latency and raise privacy concerns regarding personal data processing.",
+    approach: "Utilize lightweight open-source Large Language Models running locally via Llama.cpp and expose them through a clean local REST API.",
+    architecture: `VOICE
+  ↓
+SPEECH PROCESSING (Whisper)
+  ↓
+ORCHESTRATOR (FastAPI)
+  ↓
+MEMORY (SQLite + ChromaDB)
+  ↓
+LLM (Llama.cpp GGUF)
+  ↓
+TOOLS / ACTIONS`,
+    lessons: "Local inference speed is highly dependent on memory bandwidth. Choosing appropriate model quantization (e.g. Q4_K_M) is critical for hardware speed.",
+    links: {
+      sourceCode: "https://github.com/Kondatejagoud/Jarvis"
+    },
+    featured: true
   },
   {
-    id: "hybrid-detector",
-    title: "HYBRID DETECTOR",
-    tagline: "FAKE NEWS / INFORMATION ANALYSIS",
-    status: "DEVELOPMENT",
-    season: "SEASON 01",
-    summary: "A machine learning pipeline that analyzes news articles, cross-references statements with trusted databases, and flags credibility indices.",
-    demoUrl: "#",
-    reportUrl: "#",
-    sourceCodeUrl: "https://github.com",
-    episodes: [
-      {
-        id: "hd-ep-01",
-        title: "EP 01 — SYSTEM ARCHITECTURE",
-        objective: "Design a scalable credibility pipeline.",
-        problem: "Analyzing text style is insufficient to detect fake news; verification must cross-reference actual facts.",
-        approach: "Created a two-stage pipeline: (1) Linguistic stylometry checks, and (2) Contextual claims verification against trusted knowledge bases.",
-        technologies: ["Python", "Scikit-Learn", "NLTK", "Wikidata API"],
-        architecture: "Article Text -> Stylometric Feature Vectorizer -> NLP Claims Extractor -> Knowledge Graph Query -> Final Prediction",
-        status: "DEVELOPMENT",
-        lessonsLearned: "Sourcing verified claims in real-time is difficult. API rate limits and structural inconsistencies require robust sanitizers."
-      }
-    ]
+    id: "studymate",
+    programNumber: "PROGRAM 002",
+    title: "STUDYMATE",
+    subtitle: "AI-ASSISTED STUDY SYSTEM",
+    description: "An intelligent platform designed to assist students with schedule optimization, course load mapping, and automated flashcard generation.",
+    status: "COMPLETED",
+    category: "Software Systems",
+    technologies: ["Java", "REST APIs", "SQLite", "SQL"],
+    objective: "Provide structured planning and learning support interfaces for academic curriculums.",
+    problem: "Students face academic fragmentation when managing schedules, tasks, and summarization tools in separate interfaces.",
+    approach: "Designed a consolidated database-backed application that tracks course syllabi and utilizes text processing scripts to index notes.",
+    lessons: "Relational indexing is critical when managing multi-table schedules and note associations to maintain prompt responses.",
+    links: {
+      sourceCode: "https://github.com/Kondatejagoud/studymate"
+    },
+    featured: true
   },
   {
     id: "network-anomaly",
-    title: "NETWORK ANOMALY",
-    tagline: "MACHINE LEARNING SYSTEM",
-    status: "COMPLETE",
-    season: "SEASON 01",
-    summary: "An intrusion detection model using unsupervised machine learning to classify outliers and detect malicious network packets.",
-    demoUrl: "#",
-    reportUrl: "#",
-    sourceCodeUrl: "https://github.com",
-    episodes: [
-      {
-        id: "na-ep-01",
-        title: "EP 01 — PIPELINE & ML METHODS",
-        objective: "Perform real-time categorization of packet anomalies.",
-        problem: "Rule-based security systems cannot detect zero-day attacks that have no matching signatures.",
-        approach: "Apply Dimensionality Reduction (PCA) to normalize packet statistics, followed by DBSCAN clustering to identify anomalous outlier packets.",
-        technologies: ["Scikit-Learn", "Pandas", "NumPy", "PCA", "DBSCAN"],
-        architecture: "Network Stream -> Packet Feature Extractor -> PCA reduction -> DBSCAN clustering -> Anomaly alert console",
-        status: "COMPLETE",
-        lessonsLearned: "Unsupervised models require careful scaling of packet size and time delta features. DBSCAN is sensitive to the eps hyperparameter."
-      }
-    ]
+    programNumber: "PROGRAM 003",
+    title: "NETWORK ANOMALY DETECTION",
+    subtitle: "UNSUPERVISED MACHINE LEARNING SYSTEM",
+    description: "An unsupervised machine learning pipeline for identifying anomalous network traffic and outlier patterns.",
+    status: "COMPLETED",
+    category: "Machine Learning / Security",
+    technologies: ["Python", "Scikit-learn", "Pandas", "NumPy", "PCA", "DBSCAN"],
+    objective: "Perform real-time clustering of incoming packets to flag outlier signatures.",
+    problem: "Rule-based security systems cannot detect zero-day attacks that have no matching signatures in existing registries.",
+    approach: "Apply Dimensionality Reduction (PCA) to normalize packet statistics, followed by DBSCAN clustering to isolate outlier packets.",
+    architecture: `NETWORK TRAFFIC
+  ↓
+FEATURE EXTRACTION (Pandas)
+  ↓
+PCA (Dimensionality Reduction)
+  ↓
+DBSCAN (Clustering)
+  ↓
+ANOMALY ANALYSIS`,
+    lessons: "Unsupervised models require extensive scaling of feature magnitudes. DBSCAN is sensitive to density scale parameters (eps).",
+    links: {
+      sourceCode: "https://github.com/Kondatejagoud/Network_anomaly_detection"
+    },
+    featured: true
+  },
+  {
+    id: "smartclass-room",
+    programNumber: "PROGRAM 004",
+    title: "SMARTCLASS ROOM",
+    subtitle: "STUDENT ACTIVITY MONITORING SYSTEM",
+    description: "An aggregate tracking interface that displays environmental conditions and attendance status inside classrooms.",
+    status: "COMPLETED",
+    category: "Systems Engineering",
+    technologies: ["Java", "REST APIs", "SQL", "Git"],
+    objective: "Automate class metrics gathering and conditions tracking via a unified console.",
+    problem: "Manual attendance reporting and environmental checks are time-consuming and prone to errors.",
+    approach: "Built a secure client-server dashboard that aggregates student status flags and local classroom data.",
+    lessons: "Lightweight network payloads are essential for maintaining dashboard responsiveness across multiple concurrent class sessions.",
+    links: {
+      sourceCode: "https://github.com/Kondatejagoud/Smartclass_room"
+    },
+    featured: true
+  },
+  {
+    id: "fake-news",
+    programNumber: "PROGRAM 005",
+    title: "FAKE NEWS DETECTION",
+    subtitle: "INFORMATION ANALYSIS SYSTEM",
+    description: "A linguistic and database cross-referencing model designed to assess claims veracity and predict credibility indices of news articles.",
+    status: "LIVE",
+    category: "Natural Language Processing",
+    technologies: ["Python", "Scikit-learn", "Pandas", "NLTK", "Wikidata API"],
+    objective: "Assess credibility and flags stylometric patterns in news articles.",
+    problem: "Detecting false claims requires checking actual facts in addition to analyzing writing patterns and linguistic style.",
+    approach: "Construct a two-stage analysis pipeline verifying stylometrics and cross-checking claims with trusted public knowledge bases.",
+    architecture: `INPUT (Article Text)
+  ↓
+PREPROCESSING (NLTK Tokenizer)
+  ↓
+LINGUISTIC ANALYSIS (Stylometrics)
+  ↓
+CLAIM EXTRACTION
+  ↓
+EVIDENCE RETRIEVAL (Wikidata API)
+  ↓
+DECISION ENGINE
+  ↓
+RESULT (Credibility Report)`,
+    lessons: "Information indexing is highly dependent on factual query latency. Fallbacks are required for unindexed entities.",
+    links: {
+      sourceCode: "https://github.com/Kondatejagoud/Fake_news_detection",
+      liveDemo: "https://kondatejagoud.github.io/Fake_news_detection" // Example live demo
+    },
+    featured: true
   }
 ];

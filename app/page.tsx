@@ -21,14 +21,36 @@ import ArchiveChannel from '@/components/channels/ArchiveChannel';
 import ContactChannel from '@/components/channels/ContactChannel';
 
 const programSchedules = [
-  { time: '11:30 AM', title: 'WHO IS TEJA?', channel: 1 },
-  { time: '12:00 PM', title: 'SYSTEMS I\'VE BUILT', channel: 2 },
-  { time: '12:30 PM', title: 'INSIDE THE LAB', channel: 3 },
-  { time: '01:00 PM', title: 'TECHNOLOGY TONIGHT', channel: 4 },
-  { time: '01:30 PM', title: 'THE JOURNEY DOCUMENTARY', channel: 5 },
+  { time: '11:30 AM', title: 'ON AIR PROFILE', channel: 1 },
+  { time: '12:00 PM', title: 'PROJECT TRANSMISSIONS', channel: 2 },
+  { time: '12:30 PM', title: 'RESEARCH FEEDS', channel: 3 },
+  { time: '01:00 PM', title: 'PROVEN SKILLSETS', channel: 4 },
+  { time: '01:30 PM', title: 'DOCUMENTARY SERIES', channel: 5 },
   { time: '02:00 PM', title: 'RETRO ARCHIVE FEEDS', channel: 6 },
-  { time: '02:30 PM', title: 'OPEN CONNECTION TERMINAL', channel: 7 },
+  { time: '02:30 PM', title: 'TRANSMIT SIGNAL', channel: 7 },
 ];
+
+const channelToHash: Record<number, string> = {
+  1: 'about',
+  2: 'projects',
+  3: 'lab',
+  4: 'skills',
+  5: 'journey',
+  6: 'archive',
+  7: 'contact',
+  0: 'diagnostics',
+};
+
+const hashToChannel: Record<string, number> = {
+  '#about': 1,
+  '#projects': 2,
+  '#lab': 3,
+  '#skills': 4,
+  '#journey': 5,
+  '#archive': 6,
+  '#contact': 7,
+  '#diagnostics': 0,
+};
 
 export default function Home() {
   // Navigation & UI States
@@ -59,38 +81,67 @@ export default function Home() {
   }, []);
 
   // Channel Transition Executor
-  const changeChannel = useCallback((channelNum: number) => {
-    if (channelNum === channel && hasEntered) return;
+  const changeChannel = useCallback((channelNum: number, updateHash = true) => {
     setIsTransitioning(true);
     setChannel(channelNum);
+
+    // Sync browser URL hash fragment for deep linking
+    if (updateHash) {
+      const hashStr = channelToHash[channelNum];
+      if (hashStr) {
+        window.location.hash = hashStr;
+      } else {
+        window.location.hash = '';
+      }
+    }
+
     // Dynamic text defaults per channel
     switch (channelNum) {
       case 1:
-        setDynamicProgramText('WHO IS TEJA?');
+        setDynamicProgramText('ON AIR PROFILE');
         break;
       case 2:
-        setDynamicProgramText('SYSTEMS I\'VE BUILT');
+        setDynamicProgramText('PROJECT TRANSMISSIONS');
         break;
       case 3:
-        setDynamicProgramText('INSIDE THE LAB');
+        setDynamicProgramText('RESEARCH FEEDS');
         break;
       case 4:
-        setDynamicProgramText('TECHNOLOGY TONIGHT');
+        setDynamicProgramText('PROVEN SKILLSETS');
         break;
       case 5:
-        setDynamicProgramText('THE JOURNEY DOCUMENTARY');
+        setDynamicProgramText('DOCUMENTARY SERIES');
         break;
       case 6:
         setDynamicProgramText('RETRO ARCHIVE FEEDS');
         break;
       case 7:
-        setDynamicProgramText('OPEN CONNECTION TERMINAL');
+        setDynamicProgramText('TRANSMIT SIGNAL');
         break;
       case 0:
         setDynamicProgramText('SYSTEM DIAGNOSTICS');
         break;
     }
-  }, [channel, hasEntered]);
+  }, []);
+
+  // Handle browser URL Hash Routing on mount or hash change
+  useEffect(() => {
+    const handleHashSync = () => {
+      const currentHash = window.location.hash;
+      if (currentHash && hashToChannel[currentHash] !== undefined) {
+        const destChannel = hashToChannel[currentHash];
+        setHasEntered(true); // Jump directly past the startup screen for deep linking
+        changeChannel(destChannel, false);
+      }
+    };
+
+    // Run on initial page load
+    handleHashSync();
+
+    // Listen for manual hash edits or browser back/forward routing
+    window.addEventListener('hashchange', handleHashSync);
+    return () => window.removeEventListener('hashchange', handleHashSync);
+  }, [changeChannel]);
 
   // Navigate to project helper from Skills Channel (CH04)
   const handleNavigateToProject = (projectId: string) => {
@@ -101,7 +152,23 @@ export default function Home() {
   // Keyboard controls listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // 1. Run active child handlers first
+      // INTERCEPT INPUT FOCUS: If focused on writing inputs, ignore global navigations
+      const activeEl = document.activeElement;
+      if (activeEl) {
+        const tagName = activeEl.tagName.toLowerCase();
+        const isContentEditable = activeEl.getAttribute('contenteditable') === 'true';
+        if (
+          tagName === 'input' ||
+          tagName === 'textarea' ||
+          tagName === 'select' ||
+          isContentEditable
+        ) {
+          // Let normal typing occur
+          return;
+        }
+      }
+
+      // Dispatch to active child handlers (like project selection up/down arrows)
       for (const listener of childKeyListeners.current) {
         listener(e);
       }
@@ -112,11 +179,10 @@ export default function Home() {
       keystrokeBufferRef.current = (keystrokeBufferRef.current + key).slice(-4);
       if (keystrokeBufferRef.current === 'TEJA') {
         setOperatorGranted(true);
-        // Auto clear notification
         setTimeout(() => setOperatorGranted(false), 4000);
       }
 
-      // 2. Startup screen check
+      // Startup screen key check
       if (!hasEntered) {
         if (e.key === 'Enter') {
           setIsTransitioning(true);
@@ -125,10 +191,10 @@ export default function Home() {
         return;
       }
 
-      // 3. Main network navigation keys
+      // Global navigation shortcuts
       if (e.key === '0') {
         e.preventDefault();
-        changeChannel(0); // CH00 diagnostics easter egg
+        changeChannel(0); // Diagnostics Deck
       } else if (['1', '2', '3', '4', '5', '6', '7'].includes(e.key)) {
         e.preventDefault();
         changeChannel(parseInt(e.key, 10));
@@ -144,13 +210,13 @@ export default function Home() {
         changeChannel(nextCh);
       } else if (key === 'H') {
         e.preventDefault();
-        changeChannel(1); // CH01 (Home)
+        changeChannel(1); // Return Home
       } else if (e.key === 'Escape') {
         e.preventDefault();
         if (showSchedule) {
           setShowSchedule(false);
         } else if (channel === 0) {
-          changeChannel(1); // Return from diagnostics
+          changeChannel(1);
         }
       }
     };
@@ -159,9 +225,8 @@ export default function Home() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [hasEntered, channel, showSchedule, changeChannel]);
 
-  // Handle D-pad trigger events from Remote
+  // Handle D-pad trigger events from Remote Control
   const handleDpadUp = () => {
-    // Dispatch custom arrow event for child content
     const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
     window.dispatchEvent(event);
   };
@@ -186,52 +251,51 @@ export default function Home() {
     window.dispatchEvent(event);
   };
 
-  // Render content depending on active channel
+  // Render active channel
   const renderChannelContent = () => {
     if (channel === 0) {
       return (
-        <div className="flex-1 flex flex-col justify-center items-center p-6 text-center font-mono select-text selection:bg-[#00E5FF] selection:text-black">
-          <div className="max-w-md border border-zinc-800 bg-[#0E0E0E] rounded-lg p-6 flex flex-col gap-5 relative overflow-hidden">
-            {/* Retro overlay */}
+        <div className="flex-1 flex flex-col justify-center items-center p-6 text-center font-mono select-text selection:bg-[#00D9FF] selection:text-black">
+          <div className="max-w-md border border-zinc-800 bg-[#0D1013] rounded-lg p-6 flex flex-col gap-5 relative overflow-hidden">
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none degraded-signal bg-green-500" />
             
-            <div className="flex items-center gap-2 text-[#00E5FF] border-b border-zinc-900 pb-2.5 font-bold text-sm">
+            <div className="flex items-center gap-2 text-[#00D9FF] border-b border-zinc-900 pb-2.5 font-bold text-sm">
               <Shield size={16} />
               <span>CHANNEL 00 // SYSTEM DIAGNOSTICS</span>
             </div>
 
-            <div className="flex flex-col gap-2.5 text-xs text-left text-[#999999] leading-relaxed">
+            <div className="flex flex-col gap-2.5 text-xs text-left text-[#8D969D] leading-relaxed">
               <div className="flex justify-between">
-                <span>CORE SYSTEM STATUS</span>
-                <span className="text-green-400 font-bold">ONLINE</span>
+                <span>CORE SYSTEM SECURE</span>
+                <span className="text-green-400 font-bold">STABLE</span>
               </div>
               <div className="flex justify-between">
-                <span>BROADCAST SIGNAL INTEGRITY</span>
-                <span className="text-green-400 font-bold">ONLINE (100%)</span>
+                <span>SIGNAL ROUTE MATRIX</span>
+                <span className="text-green-400 font-bold">READY</span>
               </div>
               <div className="flex justify-between">
-                <span>PROJECT TRANSMISSION MODULE</span>
-                <span className="text-green-400 font-bold">ONLINE</span>
+                <span>PROJECT PAYLOAD MODULE</span>
+                <span className="text-[#00D9FF] font-bold">5 UNITS ACTIVE</span>
               </div>
               <div className="flex justify-between">
-                <span>EXPERIMENTAL LAB LOGS</span>
-                <span className="text-[#00E5FF] font-bold">ACTIVE</span>
+                <span>SKILLS METADATA STORE</span>
+                <span className="text-[#00D9FF] font-bold">SYNCED</span>
               </div>
               <div className="flex justify-between border-b border-zinc-900 pb-2.5">
-                <span>DEVELOPER MOTIVATION INDEX</span>
-                <span className="text-yellow-500 font-bold">QUESTIONABLE</span>
+                <span>SYSTEM VERSION CORE</span>
+                <span className="text-zinc-550 font-bold">NEXTJS 15 / TAILWIND v4</span>
               </div>
               
-              <div className="text-[10px] text-zinc-500 italic mt-1 font-sans">
-                Notice: This diagnostics deck is executing locally. All parameters are functioning within regular limits.
+              <div className="text-[10px] text-zinc-550 italic mt-1 font-sans">
+                Notice: All parameters running within normal thresholds. Designed and developed by Teja.
               </div>
             </div>
 
             <button
               onClick={() => changeChannel(1)}
-              className="py-2 border border-zinc-800 rounded bg-[#090909] text-xs font-bold hover:border-[#00E5FF] hover:text-[#00E5FF] transition-all cursor-pointer"
+              className="py-2 border border-zinc-800 rounded bg-[#080A0C] text-xs font-bold text-[#8D969D] hover:border-[#00D9FF] hover:text-[#00D9FF] transition-all cursor-pointer"
             >
-              [ BACK TO HOME FEED ]
+              [ BACK TO PROFILE FEED ]
             </button>
           </div>
         </div>
@@ -266,11 +330,11 @@ export default function Home() {
   };
 
   return (
-    <main className="w-full h-screen bg-[#070707] flex flex-col relative select-none">
+    <main className="w-full h-screen bg-[#080A0C] flex flex-col relative select-none">
       
       {/* 1. Cinematic Startup Screen */}
       {!hasEntered && (
-        <div className="absolute inset-0 bg-[#0A0A0A] z-50 flex flex-col items-center justify-center p-4 font-mono">
+        <div className="absolute inset-0 bg-[#080A0C] z-50 flex flex-col items-center justify-center p-4 font-mono">
           
           {/* CRT Screen Overlays */}
           <div className="absolute inset-0 pointer-events-none z-10 crt-screen crt-flicker">
@@ -278,10 +342,9 @@ export default function Home() {
             <div className="crt-vignette" />
           </div>
 
-          <div className="max-w-md w-full bg-[#0E0E0E]/80 border border-zinc-900 rounded-xl p-8 flex flex-col items-center text-center gap-6 relative md:tv-power-on select-text selection:bg-[#00E5FF] selection:text-black">
-            {/* Header info */}
+          <div className="max-w-md w-full bg-[#0D1013]/90 border border-zinc-800 rounded-xl p-8 flex flex-col items-center text-center gap-6 relative md:tv-power-on select-text selection:bg-[#00D9FF] selection:text-black">
             <div className="flex flex-col gap-1 items-center">
-              <h1 className="text-2xl md:text-3xl font-black text-[#F2F2F2] tracking-[0.25em] uppercase glitch-text">
+              <h1 className="text-2xl md:text-3xl font-black text-[#E6E8EA] tracking-[0.25em] uppercase glitch-text">
                 TEJA NETWORK
               </h1>
               <div className="flex items-center gap-2 text-red-500 font-bold uppercase text-[10px] mt-1 tracking-wider animate-pulse">
@@ -290,30 +353,26 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Sub headers */}
-            <div className="flex flex-col gap-0.5 text-xs text-zinc-500 border-y border-zinc-900 py-4 w-full">
-              <div>COMPUTER SCIENCE</div>
-              <div className="text-[#00E5FF] font-semibold">AI / SYSTEMS / SOFTWARE</div>
+            <div className="flex flex-col gap-0.5 text-xs text-[#8D969D] border-y border-zinc-900 py-4 w-full">
+              <div>COMPUTER SCIENCE RESEARCH</div>
+              <div className="text-[#00D9FF] font-semibold">AI / SYSTEMS / SOFTWARE</div>
             </div>
 
-            {/* Philosophy quote */}
             <div className="text-xs md:text-sm text-zinc-300 italic max-w-xs font-sans leading-relaxed">
-              &ldquo;Building things to understand them.&rdquo;
+              &ldquo;I enjoy understanding how systems work and building my own versions of them.&rdquo;
             </div>
 
-            {/* Enter network Trigger button */}
             <button
               onClick={() => {
                 setIsTransitioning(true);
                 setHasEntered(true);
               }}
-              className="mt-4 px-6 py-3 border border-zinc-800 rounded bg-[#090909] text-xs font-bold tracking-widest text-[#00E5FF] border-[#00E5FF] hover:bg-[#00E5FF]/5 transition-all shadow-[0_0_12px_rgba(0,229,255,0.15)] cursor-pointer select-none"
+              className="mt-4 px-6 py-3 border border-[#00D9FF] rounded bg-[#080A0C] text-xs font-bold tracking-widest text-[#00D9FF] hover:bg-[#00D9FF]/5 transition-all shadow-[0_0_12px_rgba(0,217,255,0.15)] cursor-pointer select-none"
             >
               [ ENTER NETWORK ]
             </button>
 
-            {/* Keyboard shortcut tips */}
-            <div className="text-[9px] text-[#555555] tracking-wide mt-2 uppercase">
+            <div className="text-[9px] text-zinc-600 tracking-wide mt-2 uppercase">
               Remote Control Compatible // Arrow Keys Keyboard Ready
             </div>
           </div>
@@ -326,19 +385,18 @@ export default function Home() {
         onTransitionEnd={() => setIsTransitioning(false)}
       />
 
-      {/* 3. Global operator egg popups */}
+      {/* 3. Global operator keys sequence popup */}
       {operatorGranted && (
-        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-55 px-6 py-3 bg-[#0E0E0E] border border-[#00E5FF] rounded-md shadow-[0_0_15px_rgba(0,229,255,0.3)] text-xs text-center font-mono animate-bounce flex items-center gap-2">
-          <Key size={14} className="text-[#00E5FF]" />
+        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-55 px-6 py-3 bg-[#0D1013] border border-[#00D9FF] rounded-md shadow-[0_0_15px_rgba(0,217,255,0.3)] text-xs text-center font-mono animate-bounce flex items-center gap-2">
+          <Key size={14} className="text-[#00D9FF]" />
           <div>
-            <span className="text-[#00E5FF] font-bold">ACCESS GRANTED.</span> WELCOME, OPERATOR.
+            <span className="text-[#00D9FF] font-bold">ACCESS GRANTED.</span> WELCOME, OPERATOR.
           </div>
         </div>
       )}
 
       {/* 4. Active Main TV Housing shell */}
       <TvShell isPowerOn={isPowerOn} isCrtEnabled={isCrtEnabled}>
-        {/* TV Viewport inner headers */}
         <BroadcastHeader
           channelNumber={channel}
           channelTitle={
@@ -362,7 +420,8 @@ export default function Home() {
           {/* Schedule button link inside content container */}
           <button
             onClick={() => setShowSchedule(true)}
-            className="absolute bottom-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-[#0E0E0E]/90 border border-zinc-850 hover:border-[#00E5FF] rounded text-[10px] font-mono text-[#777777] hover:text-[#00E5FF] cursor-pointer"
+            className="absolute bottom-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-[#0D1013]/90 border border-zinc-800 hover:border-[#00D9FF] rounded text-[10px] font-mono text-[#8D969D] hover:text-[#00D9FF] cursor-pointer"
+            aria-label="Open network schedule calendar"
           >
             <Calendar size={12} />
             <span>WHAT&apos;S ON?</span>
@@ -394,17 +453,18 @@ export default function Home() {
       {/* 6. "What's On?" TV program Schedule Modal */}
       {showSchedule && (
         <div className="fixed inset-0 bg-[#000000]/80 z-50 flex items-center justify-center p-4 font-mono select-none">
-          <div className="max-w-md w-full bg-[#0E0E0E] border border-zinc-800 rounded-lg p-5 flex flex-col gap-4 relative">
+          <div className="max-w-md w-full bg-[#0D1013] border border-zinc-800 rounded-lg p-5 flex flex-col gap-4 relative">
             
             {/* Modal Header */}
             <div className="flex justify-between items-center border-b border-zinc-900 pb-2.5">
-              <span className="flex items-center gap-1.5 text-xs text-[#00E5FF] font-bold">
+              <span className="flex items-center gap-1.5 text-xs text-[#00D9FF] font-bold">
                 <Calendar size={14} />
                 WHAT&apos;S ON TEJA NETWORK?
               </span>
               <button
                 onClick={() => setShowSchedule(false)}
-                className="text-xs text-zinc-500 hover:text-white cursor-pointer"
+                className="text-xs text-zinc-550 hover:text-white cursor-pointer"
+                aria-label="Close schedule modal"
               >
                 [ ESC ]
               </button>
@@ -421,17 +481,17 @@ export default function Home() {
                       changeChannel(slot.channel);
                       setShowSchedule(false);
                     }}
-                    className={`w-full text-left p-3 rounded border text-xs transition-all duration-150 cursor-pointer flex justify-between items-center ${
+                    className={`w-full text-left p-3 rounded border text-xs transition-all duration-150 cursor-pointer flex justify-between items-center focus:outline-none focus:ring-1 focus:ring-[#00D9FF] ${
                       isCurrent
-                        ? 'bg-zinc-900 border-[#00E5FF] text-[#00E5FF]'
-                        : 'bg-[#090909] border-zinc-900 hover:border-zinc-850 text-zinc-400 hover:text-white'
+                        ? 'bg-[#080A0C] border-[#00D9FF] text-[#00D9FF]'
+                        : 'bg-[#090B0D] border-zinc-800 text-[#8D969D] hover:text-[#E6E8EA] hover:border-zinc-700'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-[10px] font-bold text-zinc-500">{slot.time}</span>
+                      <span className="text-[10px] font-bold text-zinc-650">{slot.time}</span>
                       <span className="font-semibold uppercase tracking-wider">{slot.title}</span>
                     </div>
-                    <span className="text-[9px] font-bold font-mono text-[#777777] border border-zinc-900 px-1.5 py-0.5 rounded bg-black">
+                    <span className="text-[9px] font-bold font-mono text-zinc-550 border border-zinc-900 px-1.5 py-0.5 rounded bg-[#080A0C]">
                       CH 0{slot.channel}
                     </span>
                   </button>
@@ -439,7 +499,7 @@ export default function Home() {
               })}
             </div>
 
-            <div className="text-[9px] text-[#555555] text-center uppercase">
+            <div className="text-[9px] text-zinc-550 text-center uppercase">
               Clicking a scheduled slot switches the TV channel directly.
             </div>
           </div>

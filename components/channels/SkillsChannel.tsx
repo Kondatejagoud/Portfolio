@@ -27,16 +27,16 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
 
   const renderCategoryIcon = (category: Skill['category']) => {
     switch (category) {
-      case 'PROGRAMMING': return <Code2 size={14} className="text-[#00E5FF]" />;
-      case 'BACKEND': return <Server size={14} className="text-[#00E5FF]" />;
-      case 'MACHINE_LEARNING': return <Database size={14} className="text-[#00E5FF]" />;
-      case 'TOOLS': return <Hammer size={14} className="text-[#00E5FF]" />;
+      case 'PROGRAMMING': return <Code2 size={14} className="text-[#00D9FF]" />;
+      case 'BACKEND': return <Server size={14} className="text-[#00D9FF]" />;
+      case 'MACHINE_LEARNING': return <Database size={14} className="text-[#00D9FF]" />;
+      case 'TOOLS': return <Hammer size={14} className="text-[#00D9FF]" />;
     }
   };
 
   const getCategoryTitle = (category: Skill['category']) => {
     switch (category) {
-      case 'PROGRAMMING': return 'Programming Tonight';
+      case 'PROGRAMMING': return 'Programming Stack';
       case 'BACKEND': return 'Backend & Databases';
       case 'MACHINE_LEARNING': return 'Machine Learning Stack';
       case 'TOOLS': return 'Developer Tools';
@@ -47,11 +47,11 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
     <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 font-mono select-none">
       {/* Channel Header */}
       <div className="border-b border-zinc-800/80 pb-3">
-        <span className="text-[10px] text-[#777777] uppercase tracking-widest block mb-1">
-          CH 04 // BROADCAST FEED
+        <span className="text-[10px] text-[#8D969D] uppercase tracking-widest block mb-1">
+          CH 04 // TECHNOLOGY TONIGHT
         </span>
-        <h1 className="text-xl md:text-2xl font-extrabold text-[#F2F2F2] tracking-wider uppercase">
-          TECHNOLOGY TONIGHT // PROVEN SKILLSETS
+        <h1 className="text-xl md:text-2xl font-extrabold text-[#E6E8EA] tracking-wider uppercase">
+          PROVEN SKILLSETS
         </h1>
       </div>
 
@@ -60,8 +60,8 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
         <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
           
           {/* Programming group */}
-          <div className="border border-zinc-900 bg-black/20 rounded-lg p-4 flex flex-col gap-2.5">
-            <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
+          <div className="border border-zinc-800/60 bg-[#0D1013] rounded-lg p-4 flex flex-col gap-2.5">
+            <span className="text-[10px] text-[#8D969D] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
               <Code2 size={12} />
               PROGRAMMING
             </span>
@@ -70,11 +70,12 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
                 <button
                   key={skill.name}
                   onClick={() => setSelectedSkillName(skill.name)}
-                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer ${
+                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#00D9FF] ${
                     selectedSkillName === skill.name
-                      ? 'bg-zinc-900 border-[#00E5FF] text-[#00E5FF]'
-                      : 'bg-[#0E0E0E] border-zinc-850 text-zinc-400 hover:text-white hover:border-zinc-700'
+                      ? 'bg-[#080A0C] border-[#00D9FF] text-[#00D9FF]'
+                      : 'bg-[#090B0D] border-zinc-800/80 text-[#8D969D] hover:text-[#E6E8EA] hover:border-zinc-700'
                   }`}
+                  aria-pressed={selectedSkillName === skill.name}
                 >
                   {skill.name}
                 </button>
@@ -83,8 +84,8 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
           </div>
 
           {/* Backend group */}
-          <div className="border border-zinc-900 bg-black/20 rounded-lg p-4 flex flex-col gap-2.5">
-            <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
+          <div className="border border-zinc-800/60 bg-[#0D1013] rounded-lg p-4 flex flex-col gap-2.5">
+            <span className="text-[10px] text-[#8D969D] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
               <Server size={12} />
               BACKEND
             </span>
@@ -93,11 +94,12 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
                 <button
                   key={skill.name}
                   onClick={() => setSelectedSkillName(skill.name)}
-                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer ${
+                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#00D9FF] ${
                     selectedSkillName === skill.name
-                      ? 'bg-zinc-900 border-[#00E5FF] text-[#00E5FF]'
-                      : 'bg-[#0E0E0E] border-zinc-850 text-zinc-400 hover:text-white hover:border-zinc-700'
+                      ? 'bg-[#080A0C] border-[#00D9FF] text-[#00D9FF]'
+                      : 'bg-[#090B0D] border-zinc-800/80 text-[#8D969D] hover:text-[#E6E8EA] hover:border-zinc-700'
                   }`}
+                  aria-pressed={selectedSkillName === skill.name}
                 >
                   {skill.name}
                 </button>
@@ -106,8 +108,8 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
           </div>
 
           {/* Machine Learning group */}
-          <div className="border border-zinc-900 bg-black/20 rounded-lg p-4 flex flex-col gap-2.5">
-            <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
+          <div className="border border-zinc-800/60 bg-[#0D1013] rounded-lg p-4 flex flex-col gap-2.5">
+            <span className="text-[10px] text-[#8D969D] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
               <Database size={12} />
               MACHINE LEARNING
             </span>
@@ -116,11 +118,12 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
                 <button
                   key={skill.name}
                   onClick={() => setSelectedSkillName(skill.name)}
-                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer ${
+                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#00D9FF] ${
                     selectedSkillName === skill.name
-                      ? 'bg-zinc-900 border-[#00E5FF] text-[#00E5FF]'
-                      : 'bg-[#0E0E0E] border-zinc-850 text-zinc-400 hover:text-white hover:border-zinc-700'
+                      ? 'bg-[#080A0C] border-[#00D9FF] text-[#00D9FF]'
+                      : 'bg-[#090B0D] border-zinc-800/80 text-[#8D969D] hover:text-[#E6E8EA] hover:border-zinc-700'
                   }`}
+                  aria-pressed={selectedSkillName === skill.name}
                 >
                   {skill.name}
                 </button>
@@ -129,8 +132,8 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
           </div>
 
           {/* Tools group */}
-          <div className="border border-zinc-900 bg-black/20 rounded-lg p-4 flex flex-col gap-2.5">
-            <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
+          <div className="border border-zinc-800/60 bg-[#0D1013] rounded-lg p-4 flex flex-col gap-2.5">
+            <span className="text-[10px] text-[#8D969D] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1.5">
               <Hammer size={12} />
               TOOLS
             </span>
@@ -139,11 +142,12 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
                 <button
                   key={skill.name}
                   onClick={() => setSelectedSkillName(skill.name)}
-                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer ${
+                  className={`px-2.5 py-1.5 rounded text-xs border transition-all duration-150 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#00D9FF] ${
                     selectedSkillName === skill.name
-                      ? 'bg-zinc-900 border-[#00E5FF] text-[#00E5FF]'
-                      : 'bg-[#0E0E0E] border-zinc-850 text-zinc-400 hover:text-white hover:border-zinc-700'
+                      ? 'bg-[#080A0C] border-[#00D9FF] text-[#00D9FF]'
+                      : 'bg-[#090B0D] border-zinc-800/80 text-[#8D969D] hover:text-[#E6E8EA] hover:border-zinc-700'
                   }`}
+                  aria-pressed={selectedSkillName === skill.name}
                 >
                   {skill.name}
                 </button>
@@ -154,48 +158,48 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
         </div>
 
         {/* Selected Skill Details (takes 5 cols on lg) */}
-        <div className="lg:col-span-5 bg-[#0E0E0E] border border-zinc-800 rounded-lg p-5 flex flex-col gap-5 select-text selection:bg-[#00E5FF] selection:text-black">
+        <div className="lg:col-span-5 bg-[#0D1013] border border-zinc-800 rounded-lg p-5 flex flex-col gap-5 select-text selection:bg-[#00D9FF] selection:text-black">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
-            <span className="text-xs font-bold text-[#00E5FF] tracking-wider uppercase flex items-center gap-2">
+            <span className="text-xs font-bold text-[#00D9FF] tracking-wider uppercase flex items-center gap-2">
               <TerminalSquare size={14} />
               SYSTEM REPORT
             </span>
-            <span className="text-[9px] text-[#777777]">ID: TECH_LOG</span>
+            <span className="text-[9px] text-[#8D969D]">ID: TECH_LOG</span>
           </div>
 
           <div className="flex flex-col gap-4 text-xs md:text-sm">
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] text-[#777777] uppercase tracking-wider">TECHNOLOGY</span>
-              <span className="text-base font-extrabold text-[#F2F2F2]">{selectedSkill.name}</span>
+              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">TECHNOLOGY</span>
+              <span className="text-base font-extrabold text-[#E6E8EA]">{selectedSkill.name}</span>
             </div>
 
             <div className="flex flex-col gap-1">
-              <span className="text-[9px] text-[#777777] uppercase tracking-wider">CLASSIFICATION</span>
-              <span className="text-[#00E5FF] font-semibold flex items-center gap-1.5 uppercase text-xs">
+              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">CLASSIFICATION</span>
+              <span className="text-[#00D9FF] font-semibold flex items-center gap-1.5 uppercase text-xs">
                 {renderCategoryIcon(selectedSkill.category)}
                 {getCategoryTitle(selectedSkill.category)}
               </span>
             </div>
 
             <div className="flex flex-col gap-1.5 border-t border-zinc-900 pt-3">
-              <span className="text-[9px] text-[#777777] uppercase tracking-wider">CAPABILITY REPORT</span>
-              <p className="text-zinc-300 font-sans leading-relaxed">{selectedSkill.description}</p>
+              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">CAPABILITY REPORT</span>
+              <p className="text-[#8D969D] font-sans leading-relaxed">{selectedSkill.description}</p>
             </div>
 
             {/* Proof through Projects */}
             <div className="flex flex-col gap-2 border-t border-zinc-900 pt-3">
-              <span className="text-[9px] text-[#777777] uppercase tracking-wider">USED IN BROADCASTS</span>
+              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">USED IN BROADCASTS</span>
               {relatedProjects.length > 0 ? (
                 <div className="flex flex-col gap-1.5">
                   {relatedProjects.map(proj => (
                     <button
                       key={proj.id}
                       onClick={() => onNavigateToProject(proj.id)}
-                      className="w-full text-left bg-zinc-950 border border-zinc-900 hover:border-zinc-800 rounded p-2.5 transition-all text-xs font-semibold text-zinc-300 hover:text-[#00E5FF] flex items-center justify-between group cursor-pointer"
+                      className="w-full text-left bg-[#080A0C] border border-zinc-800 hover:border-zinc-700 rounded p-2.5 transition-all text-xs font-semibold text-[#E6E8EA] hover:text-[#00D9FF] flex items-center justify-between group cursor-pointer"
                     >
                       <span className="font-mono">{proj.title}</span>
-                      <span className="text-[9px] font-mono text-zinc-600 group-hover:text-[#00E5FF] flex items-center gap-0.5">
+                      <span className="text-[9px] font-mono text-zinc-650 group-hover:text-[#00D9FF] flex items-center gap-0.5">
                         VIEW PROGRAM
                         <ArrowUpRight size={10} />
                       </span>
@@ -203,7 +207,7 @@ export default function SkillsChannel({ onNavigateToProject }: SkillsChannelProp
                   ))}
                 </div>
               ) : (
-                <div className="bg-zinc-950/40 border border-zinc-900 text-zinc-600 rounded p-3 text-center text-xs italic font-sans">
+                <div className="bg-[#080A0C]/40 border border-zinc-900 text-zinc-600 rounded p-3 text-center text-xs italic font-sans">
                   No active public programs listed for this skill. Used in internal systems diagnostics.
                 </div>
               )}

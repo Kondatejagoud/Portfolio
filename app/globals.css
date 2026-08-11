@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-accent: #00E5FF;
-  --color-network-bg: #0A0A0A;
-  --color-network-fg: #F2F2F2;
-  --color-network-muted: #777777;
+  --color-accent: #00D9FF;
+  --color-network-bg: #080A0C;
+  --color-network-fg: #E6E8EA;
+  --color-network-muted: #8D969D;
   
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
 }
 
 :root {
-  --background: #0A0A0A;
-  --foreground: #F2F2F2;
+  --background: #080A0C;
+  --foreground: #E6E8EA;
 }
 
 body {
-  background-color: #0A0A0A;
-  color: #F2F2F2;
+  background-color: #080A0C;
+  color: #E6E8EA;
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow: hidden; /* Lock viewport for the TV housing experience */
   height: 100vh;
@@ -34,17 +34,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(10, 10, 10, 0.8);
-  border-left: 1px solid rgba(119, 119, 119, 0.2);
+  background: rgba(8, 10, 12, 0.8);
+  border-left: 1px solid rgba(141, 150, 157, 0.15);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 229, 255, 0.3);
+  background: rgba(0, 217, 255, 0.25);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 229, 255, 0.6);
+  background: rgba(0, 217, 255, 0.5);
 }
 
 /* --- CRT & Broadcast Visual FX --- */
@@ -53,7 +53,7 @@ body {
 .crt-screen {
   position: relative;
   overflow: hidden;
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.85);
 }
 
 .crt-screen::before {
@@ -61,35 +61,36 @@ body {
   display: block;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
   z-index: 40;
   background-size: 100% 3px, 6px 100%;
   pointer-events: none;
 }
 
-/* Vignette shadow */
+/* Vignette shadow - strategic corner darkening without obscuring center content */
 .crt-vignette {
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
-  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.85) 100%);
+  background: radial-gradient(circle, rgba(0,0,0,0) 65%, rgba(0,0,0,0.65) 100%);
   pointer-events: none;
   z-index: 41;
 }
 
-/* Scanning line animation */
+/* Scanning line animation - reduced speed and opacity */
 .scanline {
   width: 100%;
   height: 100px;
   background: linear-gradient(
     to bottom,
     rgba(255,255,255,0),
-    rgba(0, 229, 255, 0.04) 50%,
+    rgba(0, 217, 255, 0.02) 50%,
     rgba(255,255,255,0)
   );
   position: absolute;
   z-index: 42;
   pointer-events: none;
-  animation: scanline-move 6s linear infinite;
+  animation: scanline-move 8s linear infinite;
 }
 
 @keyframes scanline-move {
@@ -101,22 +102,22 @@ body {
   }
 }
 
-/* Subtle CRT Screen Flicker */
+/* Subtle CRT Screen Flicker - extremely faint to prevent eye strain */
 .crt-flicker {
-  animation: screen-flicker 0.15s infinite;
+  animation: screen-flicker 0.25s infinite;
 }
 
 @keyframes screen-flicker {
-  0% { opacity: 0.985; }
+  0% { opacity: 0.992; }
   50% { opacity: 1; }
-  100% { opacity: 0.99; }
+  100% { opacity: 0.995; }
 }
 
 /* TV Power On Effect */
 @keyframes power-on {
   0% {
     transform: scaleY(0.01) scaleX(0);
-    filter: brightness(3);
+    filter: brightness(3.5);
     opacity: 1;
   }
   40% {
@@ -132,12 +133,12 @@ body {
 }
 
 .tv-power-on {
-  animation: power-on 0.4s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: power-on 0.35s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
-/* CRT Screen Static Noise Animation */
+/* CRT Screen Static Noise Animation - lower opacity */
 .crt-static {
-  background-image: radial-gradient(rgba(0, 229, 255, 0.1) 15%, transparent 20%),
+  background-image: radial-gradient(rgba(0, 217, 255, 0.05) 15%, transparent 20%),
                     radial-gradient(rgba(0, 0, 0, 0.8) 15%, transparent 20%);
   background-size: 4px 4px;
   background-position: 0 0, 2px 2px;
@@ -150,7 +151,7 @@ body {
   100% { background-position: 1px 3px, 3px 1px; }
 }
 
-/* Horizontal scrolling ticker marquee */
+/* Horizontal scrolling ticker marquee - slowed down */
 @keyframes ticker-scroll {
   0% {
     transform: translate3d(0, 0, 0);
@@ -167,7 +168,7 @@ body {
 
 .ticker-content {
   display: inline-block;
-  animation: ticker-scroll 25s linear infinite;
+  animation: ticker-scroll 32s linear infinite;
   padding-left: 50%;
 }
 
@@ -177,16 +178,53 @@ body {
 
 /* Chromatic Aberration Text Shift */
 .glitch-text {
-  text-shadow: -1px 0 0 rgba(255,0,0,0.5), 1px 0 0 rgba(0,255,255,0.5);
+  text-shadow: -0.5px 0 0 rgba(255,0,0,0.35), 0.5px 0 0 rgba(0,217,255,0.35);
 }
 
 /* Retro Signal degradation grid overlay */
 .degraded-signal {
   background-image: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
     transparent 1px,
     transparent 2px
   );
+}
+
+/* --- ACCESSIBILITY: REDUCED MOTION SUPPORT --- */
+@media (prefers-reduced-motion: reduce) {
+  .scanline {
+    animation: none !important;
+    display: none !important;
+  }
+  
+  .crt-flicker {
+    animation: none !important;
+  }
+  
+  .tv-power-on {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  
+  .crt-static {
+    animation: none !important;
+    background-image: none !important;
+    background-color: #080A0C !important;
+  }
+  
+  .ticker-content {
+    animation: none !important;
+    white-space: normal !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1.5rem !important;
+    padding-left: 1rem !important;
+  }
+  
+  .glitch-text {
+    text-shadow: none !important;
+  }
 }

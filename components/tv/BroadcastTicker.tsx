@@ -3,30 +3,29 @@
 import React from 'react';
 
 const tickerItems = [
-  "NEW AI EXPERIMENT IN DEVELOPMENT",
-  "JARVIS ARCHITECTURE STABLE - VECTOR DATABASE SYNCHRONIZED",
-  "CURRENTLY LEARNING ADVANCED AGENT ORCHESTRATION & DEEPER LLM MEMORY RETRIEVAL",
-  "HYBRID DETECTOR MODEL ENTERING STAGE 2 LINGUISTIC CALIBRATION",
-  "NETWORK ANOMALY CLUSTERING COMPLETE - PACKET FILTERS ONLINE",
-  "REMOTE CONTROL ACTIVE - CHANGE CHANNELS USING KEYBOARD SHORTCUTS 1 TO 7",
-  "ENTER DEEP MODE: PRESS 0 FOR CONSOLE SYSTEM DIAGNOSTICS",
+  "JARVIS SYSTEM RUNNING ACTIVE - LOCAL MEMORY RETRIEVAL INTERFACES SYNCHRONIZED",
+  "FAKE NEWS DETECTION LIVE BROADCAST ONLINE - DEMO LINK CONFIGURED",
+  "NETWORK ANOMALY CLUSTERING COMPLETE - PCA Packet Filters Installed",
+  "STUDYMATE PLATFORM SYSTEM INTEGRATED - COURSE DATABASE INDEX STABLE",
+  "SMARTCLASS ROOM CONSOLE COMPLETED - ACTIVITY TRACKER PACKETS ONLINE",
+  "KEYBOARD OVERLAY COMPATIBLE - CHANGE CHANNELS VIA 1-7 NUMERICS",
 ];
 
 export default function BroadcastTicker() {
   return (
-    <div className="w-full bg-[#050505] border-t border-zinc-800/60 py-2 h-9 flex items-center font-mono text-xs select-none">
-      <div className="px-4 text-[#00E5FF] font-bold border-r border-zinc-800/60 uppercase flex items-center gap-2 flex-shrink-0 animate-pulse">
-        <span className="inline-block w-2 h-2 rounded-full bg-red-600 animate-ping" />
-        NEWS TICKER
+    <div className="w-full bg-[#080A0C] border-t border-zinc-800/60 py-2 h-9 flex items-center font-mono text-xs select-none">
+      <div className="px-4 text-[#00D9FF] font-bold border-r border-zinc-800/60 uppercase flex items-center gap-2 flex-shrink-0 animate-pulse">
+        <span className="inline-block w-2 h-2 rounded-full bg-red-655" />
+        BREAKING
       </div>
       
       <div className="ticker-wrap flex-1 relative overflow-hidden">
-        <div className="ticker-content flex gap-12 text-[#777777]">
-          {/* Double content for infinite loop effect */}
+        <div className="ticker-content flex gap-12 text-[#8D969D]" role="marquee">
+          {/* Double contents for loop scroll */}
           {[...tickerItems, ...tickerItems].map((item, idx) => (
-            <span key={idx} className="inline-flex items-center gap-2">
-              <span className="text-[#F2F2F2]">{item}</span>
-              <span className="text-[#00E5FF] font-bold">•</span>
+            <span key={idx} className="inline-flex items-center gap-2 font-medium">
+              <span className="text-[#E6E8EA] tracking-wide">{item}</span>
+              <span className="text-[#00D9FF] font-black">•</span>
             </span>
           ))}
         </div>

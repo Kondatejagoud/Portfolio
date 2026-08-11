@@ -16,6 +16,15 @@ export default function ChannelTransition({
   useEffect(() => {
     if (!isTransitioning) return;
 
+    // Check prefers-reduced-motion media query
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mediaQuery.matches) {
+      if (onTransitionEnd) {
+        onTransitionEnd();
+      }
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

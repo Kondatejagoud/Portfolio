@@ -75,7 +75,7 @@ export const journeyData: JourneyYear[] = [
     ],
     built: [
       "Jarvis: Local AI Assistant with memory",
-      "Hybrid Detector: Fake news credibility analysis platform",
+      "Fake News Detection: Veracity assessment platform",
       "Network Traffic Anomaly Detection system"
     ],
     objective: "Build more reliable, privacy-preserving intelligent systems integrated with local data stores.",

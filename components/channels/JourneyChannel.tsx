@@ -14,12 +14,12 @@ export default function JourneyChannel() {
       {/* Channel Header */}
       <div className="border-b border-zinc-800/80 pb-3 flex justify-between items-center">
         <div className="flex flex-col">
-          <span className="text-[10px] text-[#777777] uppercase tracking-widest block mb-1">
-            CH 05 // BROADCAST FEED
+          <span className="text-[10px] text-[#8D969D] uppercase tracking-widest block mb-1">
+            CH 05 // THE JOURNEY
           </span>
-          <h1 className="text-xl md:text-2xl font-extrabold text-[#F2F2F2] tracking-wider uppercase flex items-center gap-2">
-            <Film className="text-[#00E5FF]" size={20} />
-            TEJA: THE JOURNEY // DOCUMENTARY SERIES
+          <h1 className="text-xl md:text-2xl font-extrabold text-[#E6E8EA] tracking-wider uppercase flex items-center gap-2">
+            <Film className="text-[#00D9FF]" size={20} />
+            DOCUMENTARY SERIES
           </h1>
         </div>
       </div>
@@ -37,17 +37,18 @@ export default function JourneyChannel() {
                 <button
                   key={jd.year}
                   onClick={() => setActiveYear(jd.year)}
-                  className={`w-full text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer flex items-center justify-between group focus:outline-none ${
+                  className={`w-full text-left p-3 rounded border text-xs transition-all duration-200 cursor-pointer flex items-center justify-between group focus:outline-none focus:ring-1 focus:ring-[#00D9FF] ${
                     isActive
-                      ? 'bg-zinc-900 border-[#00E5FF] text-[#00E5FF] shadow-[0_0_6px_rgba(0,229,255,0.15)]'
-                      : 'bg-[#0E0E0E] border-zinc-900 hover:border-zinc-800 text-[#777777] hover:text-[#F2F2F2]'
+                      ? 'bg-[#0D1013] border-[#00D9FF] text-[#00D9FF] shadow-[0_0_6px_rgba(0,217,255,0.15)]'
+                      : 'bg-[#090B0D] border-zinc-900 hover:border-zinc-800 text-[#8D969D] hover:text-[#E6E8EA]'
                   }`}
+                  aria-pressed={isActive}
                 >
                   <div className="flex flex-col">
-                    <span className="text-[9px] uppercase tracking-wider font-bold mb-0.5 text-zinc-500 group-hover:text-[#00E5FF] transition-colors">
+                    <span className="text-[9px] uppercase tracking-wider font-bold mb-0.5 text-zinc-650 group-hover:text-[#00D9FF] transition-colors">
                       {jd.episodeTitle}
                     </span>
-                    <span className={`font-extrabold ${isActive ? 'text-[#00E5FF]' : 'text-zinc-300'}`}>
+                    <span className={`font-extrabold ${isActive ? 'text-[#00D9FF]' : 'text-zinc-300'}`}>
                       {jd.title}
                     </span>
                   </div>
@@ -55,8 +56,8 @@ export default function JourneyChannel() {
                     size={16} 
                     className={`flex-shrink-0 transition-transform ${
                       isActive 
-                        ? 'text-[#00E5FF] scale-110' 
-                        : 'text-zinc-700 group-hover:text-zinc-500'
+                        ? 'text-[#00D9FF] scale-110' 
+                        : 'text-zinc-700 group-hover:text-[#8D969D]'
                     }`} 
                   />
                 </button>
@@ -66,34 +67,34 @@ export default function JourneyChannel() {
         </div>
 
         {/* Playback Viewer (takes 8 cols on lg) */}
-        <div className="lg:col-span-8 bg-[#0E0E0E] border border-zinc-800 rounded-lg p-5 flex flex-col gap-6 relative overflow-hidden select-text selection:bg-[#00E5FF] selection:text-black">
+        <div className="lg:col-span-8 bg-[#0D1013] border border-zinc-855 rounded-lg p-5 flex flex-col gap-6 relative overflow-hidden select-text selection:bg-[#00D9FF] selection:text-black">
           {/* Watermark scanlines */}
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none degraded-signal" />
 
           {/* Viewer header */}
           <div className="flex justify-between items-start border-b border-zinc-900 pb-3 flex-wrap gap-2 z-10">
             <div className="flex flex-col">
-              <span className="text-[9px] text-[#00E5FF] font-bold tracking-widest uppercase">
+              <span className="text-[9px] text-[#00D9FF] font-bold tracking-widest uppercase">
                 NOW SCREENING — {activeDoc.episodeTitle}
               </span>
-              <h2 className="text-base md:text-lg font-black text-[#F2F2F2] tracking-wide">
+              <h2 className="text-base md:text-lg font-black text-[#E6E8EA] tracking-wide uppercase">
                 {activeDoc.title} ({activeDoc.year})
               </h2>
             </div>
-            <div className="px-2 py-0.5 border border-zinc-800 bg-zinc-900/50 rounded text-[9px] font-bold text-zinc-400">
+            <div className="px-2 py-0.5 border border-zinc-800 bg-[#080A0C] rounded text-[9px] font-bold text-[#8D969D]">
               HD BROADCAST FEED
             </div>
           </div>
 
           <div className="flex flex-col gap-5 text-xs md:text-sm leading-relaxed z-10">
             {/* Summary */}
-            <p className="font-sans text-[#999999] leading-relaxed">
+            <p className="font-sans text-[#8D969D] leading-relaxed">
               {activeDoc.summary}
             </p>
 
             {/* Objective */}
-            <div className="flex flex-col gap-1 bg-zinc-950 border border-zinc-900 p-3 rounded">
-              <span className="text-[9px] text-[#00E5FF] uppercase tracking-wider font-bold flex items-center gap-1.5">
+            <div className="flex flex-col gap-1 bg-[#080A0C] border border-zinc-900/60 p-3 rounded">
+              <span className="text-[9px] text-[#00D9FF] uppercase tracking-wider font-bold flex items-center gap-1.5">
                 <Compass size={12} />
                 EPISODE OBJECTIVE
               </span>
@@ -103,11 +104,11 @@ export default function JourneyChannel() {
             {/* Learned list */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
-                <span className="text-[9px] text-[#777777] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1">
-                  <Award size={12} className="text-[#00E5FF]" />
+                <span className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1">
+                  <Award size={12} className="text-[#00D9FF]" />
                   ACQUIRED KNOWLEDGE
                 </span>
-                <ul className="flex flex-col gap-1.5 font-sans text-[#999999] pl-3.5 list-disc">
+                <ul className="flex flex-col gap-1.5 font-sans text-[#8D969D] pl-3.5 list-disc">
                   {activeDoc.learned.map((item, idx) => (
                     <li key={idx}>{item}</li>
                   ))}
@@ -116,11 +117,11 @@ export default function JourneyChannel() {
 
               {/* Built list */}
               <div className="flex flex-col gap-2">
-                <span className="text-[9px] text-[#777777] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1">
-                  <Terminal size={12} className="text-[#00E5FF]" />
+                <span className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold flex items-center gap-1.5 border-b border-zinc-900 pb-1">
+                  <Terminal size={12} className="text-[#00D9FF]" />
                   SYSTEMS COMPILED
                 </span>
-                <ul className="flex flex-col gap-1.5 font-sans text-[#999999] pl-3.5 list-disc">
+                <ul className="flex flex-col gap-1.5 font-sans text-[#8D969D] pl-3.5 list-disc">
                   {activeDoc.built.map((item, idx) => (
                     <li key={idx}>{item}</li>
                   ))}
