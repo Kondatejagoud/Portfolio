@@ -1,114 +1,192 @@
-export interface CurrentlyBuilding {
-  project: string;
-  subtitle: string;
-  status: 'ACTIVE' | 'IDLE';
-  focus: string[];
-}
-
-export interface DevelopmentLog {
-  date: string;
-  project: string;
-  change: string;
-  status: 'COMPLETED' | 'IN PROGRESS';
-}
-
-export interface TechnicalNote {
+export interface WorkshopActivity {
+  id: string;
+  projectId: string; // 'jarvis' | 'studymate' | 'network-anomaly' | 'smartclass-room' | 'fake-news'
+  date?: string;
+  category:
+    | "development"
+    | "technical-note"
+    | "lesson"
+    | "problem"
+    | "learning";
   title: string;
-  explanation: string;
-  relatedProject: string;
+  description: string;
+  status?: string;
 }
 
-export interface LearningTopic {
-  topic: string;
-  status: 'IN PROGRESS' | 'EXPLORING' | 'COMPLETED';
-}
-
-export interface BrokenThing {
-  project: string;
-  problem: string;
-  cause: string;
-  lesson: string;
-  status: 'RESOLVED' | 'INVESTIGATING';
-}
-
-export const currentlyBuilding: CurrentlyBuilding[] = [
+export const workshopActivities: WorkshopActivity[] = [
+  // 1. Development Logs (Category: 'development')
   {
-    project: "JARVIS",
-    subtitle: "Local AI Assistant",
-    status: "ACTIVE",
-    focus: [
-      "Memory retrieval logic",
-      "FastAPI backend architecture",
-      "Local voice processing integration",
-      "Asynchronous background tool execution"
-    ]
-  }
-];
-
-export const developmentLogs: DevelopmentLog[] = [
-  {
-    date: "11 AUG 2026",
-    project: "TEJA NETWORK",
-    change: "Refined the portfolio architecture, replaced the episode-based project structure with a program-based system, and redesigned the Workshop around real development activity.",
+    id: "dev-1",
+    projectId: "jarvis",
+    date: "10 AUG 2026",
+    category: "development",
+    title: "Memory retrieval architecture improved",
+    description: "Integrated SQLite relational database and ChromaDB semantic context matching to resolve retrieval query speed and accuracy issues.",
     status: "COMPLETED"
   },
   {
+    id: "dev-2",
+    projectId: "fake-news",
     date: "08 AUG 2026",
-    project: "FAKE NEWS DETECTION",
-    change: "Refined preprocessing and evidence retrieval components.",
+    category: "development",
+    title: "Evidence retrieval and preprocessing refined",
+    description: "Refined pre-processing text pipelines using NLTK and added Wikidata verification caching fallback routes.",
     status: "COMPLETED"
   },
   {
+    id: "dev-3",
+    projectId: "network-anomaly",
     date: "05 AUG 2026",
-    project: "NETWORK ANOMALY DETECTION",
-    change: "Improved the anomaly detection pipeline and reviewed PCA/DBSCAN processing.",
+    category: "development",
+    title: "PCA/DBSCAN processing reviewed",
+    description: "Evaluated feature compression scaling factors and DBSCAN hyper-parameters to minimize packet detection latency under heavy load.",
     status: "COMPLETED"
-  }
-];
+  },
 
-export const technicalNotes: TechnicalNote[] = [
+  // 2. Technical Notes (Category: 'technical-note')
   {
+    id: "note-1",
+    projectId: "jarvis",
+    category: "technical-note",
     title: "WHY FASTAPI?",
-    explanation: "FastAPI provides native support for asynchronous routing. This prevents the single-threaded Python runtime from blocking during heavy local LLM inference queries.",
-    relatedProject: "JARVIS"
+    description: "Exposes asynchronous routes so the single-threaded python engine is never blocked during long-running local LLM inference operations.",
   },
   {
+    id: "note-2",
+    projectId: "network-anomaly",
+    category: "technical-note",
     title: "WHY DBSCAN?",
-    explanation: "DBSCAN is ideal for anomaly detection because it clusters data based on density and handles arbitrary shapes. It automatically labels sparse packet variations as noise without requiring a pre-specified number of clusters.",
-    relatedProject: "NETWORK ANOMALY DETECTION"
+    description: "Clusters incoming data by spatial density without requiring you to pre-define the target cluster count, marking anomalies as noise.",
   },
   {
+    id: "note-3",
+    projectId: "network-anomaly",
+    category: "technical-note",
     title: "WHY PCA?",
-    explanation: "Principal Component Analysis reduces high-dimensional packet parameters down to key components, preserving variance while minimizing the computational cost of spatial clustering algorithms.",
-    relatedProject: "NETWORK ANOMALY DETECTION"
+    description: "Compresses raw high-dimensional packet data down to key principal components to speed up spatial distance calculations.",
   },
   {
-    title: "HOW MEMORY WORKS IN JARVIS",
-    explanation: "Jarvis uses a hybrid memory system. Chat context is vectorized in ChromaDB for semantic search retrieval, while structural parameters are queried directly from an SQLite relational backend.",
-    relatedProject: "JARVIS"
-  }
-];
-
-export const learning: LearningTopic[] = [
-  { topic: "AI Agent Workflows & Coordination", status: "IN PROGRESS" },
-  { topic: "Advanced Systems Design & Scaling", status: "EXPLORING" },
-  { topic: "CUDA Hardware-Accelerated Inference", status: "EXPLORING" }
-];
-
-export const problems: BrokenThing[] = [
+    id: "note-4",
+    projectId: "fake-news",
+    category: "technical-note",
+    title: "EVIDENCE RETRIEVAL",
+    description: "Synthesizes stylistic features with factual checking using the Wikidata API to assess article veracity.",
+  },
   {
-    project: "NETWORK ANOMALY DETECTION",
-    problem: "Packet clustering processing latency exceeded 500ms.",
-    cause: "DBSCAN was calculating spatial density distance over too many raw packet feature dimensions.",
-    lesson: "Dimensionality reduction (PCA) must precede density clustering on high-frequency network streams.",
+    id: "note-5",
+    projectId: "smartclass-room",
+    category: "technical-note",
+    title: "STUDENT MONITORING",
+    description: "Organizes environmental packets and activity signals in real-time to track session participation rates.",
+  },
+  {
+    id: "note-6",
+    projectId: "studymate",
+    category: "technical-note",
+    title: "STUDY WORKFLOW DESIGN",
+    description: "Optimizes multi-table indexing to connect course details, schedules, and flashcard queues dynamically.",
+  },
+
+  // 3. Lessons (Category: 'lesson')
+  {
+    id: "lesson-1",
+    projectId: "jarvis",
+    category: "lesson",
+    title: "Memory Systems",
+    description: "Memory systems require careful retrieval and context management.",
+  },
+  {
+    id: "lesson-2",
+    projectId: "network-anomaly",
+    category: "lesson",
+    title: "Feature Preparation",
+    description: "Feature preparation and clustering parameters strongly affect unsupervised anomaly detection.",
+  },
+  {
+    id: "lesson-3",
+    projectId: "fake-news",
+    category: "lesson",
+    title: "Text Analysis",
+    description: "Text analysis alone is not enough for reliable information verification; contextual evidence matters.",
+  },
+  {
+    id: "lesson-4",
+    projectId: "studymate",
+    category: "lesson",
+    title: "User-Focused Design",
+    description: "User-focused systems need a simple workflow in addition to technical functionality.",
+  },
+  {
+    id: "lesson-5",
+    projectId: "smartclass-room",
+    category: "lesson",
+    title: "Monitoring Signals",
+    description: "Monitoring systems require careful handling of events, activity signals and data flow.",
+  },
+
+  // 4. Broken Things / Troubleshooting logs (Category: 'problem')
+  {
+    id: "problem-1",
+    projectId: "jarvis",
+    category: "problem",
+    title: "Memory retrieval returned irrelevant context",
+    description: "Simple keyword queries were pulling unrelated facts from the vector DB. Resolved by calibrating similarity thresholds and pre-filtering meta-keys.",
     status: "RESOLVED"
   },
   {
-    project: "FAKE NEWS DETECTION",
-    problem: "Wikidata verification API queries timed out under load.",
-    cause: "Concurrent network checks on claims triggered remote API rate limits.",
-    lesson: "Caching query results locally in a lightweight store is essential to prevent rate limit blocks during claims matching.",
+    id: "problem-2",
+    projectId: "network-anomaly",
+    category: "problem",
+    title: "Clustering behavior changed significantly with preprocessing",
+    description: "DBSCAN spatial density calculations timed out. Resolved by running PCA dimensionality reduction prior to clustering.",
     status: "RESOLVED"
+  },
+  {
+    id: "problem-3",
+    projectId: "fake-news",
+    category: "problem",
+    title: "Evidence retrieval needed fallback handling",
+    description: "Remote Wikidata queries timed out. Resolved by caching Wikidata responses in a lightweight cache database.",
+    status: "RESOLVED"
+  },
+  {
+    id: "problem-4",
+    projectId: "smartclass-room",
+    category: "problem",
+    title: "Activity monitoring required more careful event handling",
+    description: "Heavy aggregate attendance packets choked WebSocket connections. Resolved by using differential updates.",
+    status: "RESOLVED"
+  },
+  {
+    id: "problem-5",
+    projectId: "studymate",
+    category: "problem",
+    title: "Workflow design needed simplification",
+    description: "Database queries suffered from high latency. Resolved by redesigning index structures.",
+    status: "RESOLVED"
+  },
+
+  // 5. Technologies being explored / currently learning (Category: 'learning')
+  {
+    id: "learn-1",
+    projectId: "jarvis",
+    category: "learning",
+    title: "AI AGENT ARCHITECTURE",
+    description: "IN PROGRESS",
+  },
+  {
+    id: "learn-2",
+    projectId: "fake-news",
+    category: "learning",
+    title: "SYSTEM DESIGN",
+    description: "EXPLORING",
+  },
+  {
+    id: "learn-3",
+    projectId: "network-anomaly",
+    category: "learning",
+    title: "BACKEND ENGINEERING",
+    description: "EXPLORING",
   }
 ];
 

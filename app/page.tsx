@@ -308,7 +308,7 @@ export default function Home() {
           />
         );
       case 3:
-        return <WorkshopChannel />;
+        return <WorkshopChannel onNavigateToProject={handleNavigateToProject} />;
       case 4:
         return <SkillsChannel onNavigateToProject={handleNavigateToProject} />;
       case 5:
