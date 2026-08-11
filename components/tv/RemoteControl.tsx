@@ -31,8 +31,8 @@ export default function RemoteControl({
   // Quick channel increment/decrement
   const handleChannelOffset = (offset: number) => {
     let nextCh = currentChannel + offset;
-    if (nextCh < 1) nextCh = 7;
-    if (nextCh > 7) nextCh = 1;
+    if (nextCh < 1) nextCh = 6;
+    if (nextCh > 6) nextCh = 1;
     onChannelChange(nextCh);
   };
 

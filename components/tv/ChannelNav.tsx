@@ -11,11 +11,10 @@ interface Channel {
 const channelsList: Channel[] = [
   { number: 1, label: 'CH 01', name: 'ABOUT' },
   { number: 2, label: 'CH 02', name: 'PROJECTS' },
-  { number: 3, label: 'CH 03', name: 'LAB' },
+  { number: 3, label: 'CH 03', name: 'WORKSHOP' },
   { number: 4, label: 'CH 04', name: 'SKILLS' },
   { number: 5, label: 'CH 05', name: 'JOURNEY' },
-  { number: 6, label: 'CH 06', name: 'ARCHIVE' },
-  { number: 7, label: 'CH 07', name: 'CONTACT' },
+  { number: 6, label: 'CH 06', name: 'CONTACT' },
 ];
 
 interface ChannelNavProps {
@@ -60,8 +59,8 @@ export default function ChannelNav({
           );
         })}
       </div>
-      <div className="hidden xl:flex items-center gap-2 ml-4 text-[10px] font-mono text-zinc-600">
-        <span>CHANNELS 1-7</span>
+      <div className="hidden xl:flex items-center gap-2 ml-4 text-[10px] font-mono text-zinc-650">
+        <span>CHANNELS 1-6</span>
         <span>•</span>
         <span>REMOTE ACTIVE</span>
       </div>

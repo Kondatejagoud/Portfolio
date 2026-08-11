@@ -17,7 +17,6 @@ import ProjectsChannel from '@/components/channels/ProjectsChannel';
 import WorkshopChannel from '@/components/channels/WorkshopChannel';
 import SkillsChannel from '@/components/channels/SkillsChannel';
 import JourneyChannel from '@/components/channels/JourneyChannel';
-import ArchiveChannel from '@/components/channels/ArchiveChannel';
 import ContactChannel from '@/components/channels/ContactChannel';
 
 const programSchedules = [
@@ -26,8 +25,7 @@ const programSchedules = [
   { time: '12:30 PM', title: 'TEJA WORKSHOP', channel: 3 },
   { time: '01:00 PM', title: 'PROVEN SKILLSETS', channel: 4 },
   { time: '01:30 PM', title: 'DOCUMENTARY SERIES', channel: 5 },
-  { time: '02:00 PM', title: 'RETRO ARCHIVE FEEDS', channel: 6 },
-  { time: '02:30 PM', title: 'TRANSMIT SIGNAL', channel: 7 },
+  { time: '02:00 PM', title: 'TRANSMIT SIGNAL', channel: 6 },
 ];
 
 const channelToHash: Record<number, string> = {
@@ -36,8 +34,7 @@ const channelToHash: Record<number, string> = {
   3: 'lab',
   4: 'skills',
   5: 'journey',
-  6: 'archive',
-  7: 'contact',
+  6: 'contact',
   0: 'diagnostics',
 };
 
@@ -47,8 +44,7 @@ const hashToChannel: Record<string, number> = {
   '#lab': 3,
   '#skills': 4,
   '#journey': 5,
-  '#archive': 6,
-  '#contact': 7,
+  '#contact': 6,
   '#diagnostics': 0,
 };
 
@@ -113,9 +109,6 @@ export default function Home() {
         setDynamicProgramText('DOCUMENTARY SERIES');
         break;
       case 6:
-        setDynamicProgramText('RETRO ARCHIVE FEEDS');
-        break;
-      case 7:
         setDynamicProgramText('TRANSMIT SIGNAL');
         break;
       case 0:
@@ -195,18 +188,18 @@ export default function Home() {
       if (e.key === '0') {
         e.preventDefault();
         changeChannel(0); // Diagnostics Deck
-      } else if (['1', '2', '3', '4', '5', '6', '7'].includes(e.key)) {
+      } else if (['1', '2', '3', '4', '5', '6'].includes(e.key)) {
         e.preventDefault();
         changeChannel(parseInt(e.key, 10));
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         let prevCh = channel - 1;
-        if (prevCh < 1) prevCh = 7;
+        if (prevCh < 1) prevCh = 6;
         changeChannel(prevCh);
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
         let nextCh = channel + 1;
-        if (nextCh > 7) nextCh = 1;
+        if (nextCh > 6) nextCh = 1;
         changeChannel(nextCh);
       } else if (key === 'H') {
         e.preventDefault();
@@ -321,8 +314,6 @@ export default function Home() {
       case 5:
         return <JourneyChannel />;
       case 6:
-        return <ArchiveChannel />;
-      case 7:
         return <ContactChannel />;
       default:
         return <AboutChannel />;
@@ -405,8 +396,7 @@ export default function Home() {
             channel === 3 ? 'WORKSHOP' :
             channel === 4 ? 'SKILLS' :
             channel === 5 ? 'JOURNEY' :
-            channel === 6 ? 'ARCHIVE' :
-            channel === 7 ? 'CONTACT' : 'DIAGNOSTICS'
+            channel === 6 ? 'CONTACT' : 'DIAGNOSTICS'
           }
           currentProgram={dynamicProgramText}
         />

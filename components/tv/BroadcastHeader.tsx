@@ -46,9 +46,7 @@ export default function BroadcastHeader({
         return { label: 'SIGNAL: ACTIVE DEVELOPMENT', color: 'text-[#00D9FF] font-bold' };
       case 5: // Journey
         return { label: 'SIGNAL: TRANSMITTING', color: 'text-cyan-400' };
-      case 6: // Archive
-        return { label: 'SIGNAL: DEGRADED', color: 'text-red-500 animate-pulse' };
-      case 7: // Contact
+      case 6: // Contact
         return { label: 'SIGNAL: OPEN', color: 'text-[#00D9FF] font-bold' };
       default:
         return { label: 'SIGNAL: STABLE', color: 'text-[#00D9FF]' };

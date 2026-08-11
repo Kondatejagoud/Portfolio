@@ -97,13 +97,6 @@ export const learning: LearningTopic[] = [
 
 export const problems: BrokenThing[] = [
   {
-    project: "JARVIS",
-    problem: "Memory retrieval returned irrelevant context.",
-    cause: "Simple keyword matches were pulling unrelated facts from the vector DB.",
-    lesson: "Retrieval filtering and similarity threshold calibrations are as critical as the size of the model context itself.",
-    status: "RESOLVED"
-  },
-  {
     project: "NETWORK ANOMALY DETECTION",
     problem: "Packet clustering processing latency exceeded 500ms.",
     cause: "DBSCAN was calculating spatial density distance over too many raw packet feature dimensions.",
