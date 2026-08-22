@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme inline {
@@ -6,8 +7,8 @@
   --color-network-fg: #E6E8EA;
   --color-network-muted: #8D969D;
   
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-sans: 'Sora', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 :root {

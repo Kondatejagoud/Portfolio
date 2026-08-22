@@ -27,6 +27,7 @@ interface BroadcastTickerProps {
 
 export default function BroadcastTicker({ channel = 1 }: BroadcastTickerProps) {
   const isWorkshop = channel === 3;
+  const isSkills = channel === 4;
   const isContact = channel === 6;
 
   // Generate contact ticker items dynamically based on site config truth
@@ -39,14 +40,28 @@ export default function BroadcastTicker({ channel = 1 }: BroadcastTickerProps) {
     "TRANSMISSION READY",
   ];
 
+  const skillsTickerItems = [
+    "SKILL MATRIX ONLINE",
+    "PYTHON",
+    "AI / MACHINE LEARNING",
+    "BACKEND SYSTEMS",
+    "DATA PROCESSING",
+    "GIT / GITHUB",
+    "CURRENTLY EXPLORING SYSTEM DESIGN",
+  ];
+
   const items = isWorkshop 
     ? workshopTickerItems 
+    : isSkills
+    ? skillsTickerItems
     : isContact 
     ? contactTickerItems 
     : defaultTickerItems;
 
   const label = isWorkshop 
     ? "DEVELOPMENT UPDATE" 
+    : isSkills
+    ? "SKILL MATRIX"
     : isContact 
     ? "SIGNAL: OPEN" 
     : "BREAKING";

@@ -5,9 +5,9 @@ import { journeyData } from '@/data/journey';
 import { PlayCircle, Award, Terminal, Compass, Film } from 'lucide-react';
 
 export default function JourneyChannel() {
-  const [activeYear, setActiveYear] = useState<string>(journeyData[3].year); // Default to 2026
+  const [activeYear, setActiveYear] = useState<string>(journeyData[0].year); // Default to 2023
 
-  const activeDoc = journeyData.find(j => j.year === activeYear) || journeyData[3];
+  const activeDoc = journeyData.find(j => j.year === activeYear) || journeyData[0];
 
   return (
     <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 font-mono select-none">

@@ -1,18 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const sora = Sora({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Konda Teja | AI, Software & Systems",
@@ -34,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
+      className="h-full antialiased dark"
     >
       <body className="h-full bg-[#080A0C] text-[#E6E8EA]">
         {children}
