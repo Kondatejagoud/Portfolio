@@ -126,6 +126,17 @@ export default function ProjectsChannel({
             <circle cx="63" cy="64" r="3" fill="currentColor" />
           </svg>
         );
+      case 'smartclass-room':
+        return (
+          <svg className="w-full h-full text-indigo-400/30" viewBox="0 0 100 100" fill="none">
+            <rect x="20" y="25" width="60" height="45" rx="4" stroke="currentColor" strokeWidth="1.5" />
+            <circle cx="50" cy="20" r="3" stroke="currentColor" strokeWidth="1" />
+            <circle cx="50" cy="47" r="10" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1="30" y1="60" x2="70" y2="60" stroke="currentColor" strokeWidth="1" />
+            <line x1="40" y1="70" x2="60" y2="70" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="50" y1="70" x2="50" y2="80" stroke="currentColor" strokeWidth="1.5" />
+          </svg>
+        );
       default:
         return (
           <svg className="w-full h-full text-zinc-550/20" viewBox="0 0 100 100" fill="none">

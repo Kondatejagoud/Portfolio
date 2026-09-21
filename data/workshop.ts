@@ -76,8 +76,8 @@ export const workshopActivities: WorkshopActivity[] = [
     id: "note-5",
     projectId: "smartclass-room",
     category: "technical-note",
-    title: "STUDENT MONITORING",
-    description: "Organizes environmental packets and activity signals in real-time to track session participation rates.",
+    title: "STUDENT ACTIVITY MONITORING",
+    description: "Uses camera visual inputs and computer-vision streams to analyze student activity signals during online classes.",
   },
   {
     id: "note-6",
@@ -120,8 +120,8 @@ export const workshopActivities: WorkshopActivity[] = [
     id: "lesson-5",
     projectId: "smartclass-room",
     category: "lesson",
-    title: "Monitoring Signals",
-    description: "Monitoring systems require careful handling of events, activity signals and data flow.",
+    title: "Computer Vision Activity Streams",
+    description: "Analyzing visual activity signals during online learning sessions provides valuable engagement information for instructors.",
   },
 
   // 5. Technologies being explored / currently learning (Category: 'learning')

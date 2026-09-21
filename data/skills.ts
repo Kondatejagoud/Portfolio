@@ -17,7 +17,7 @@ export const skillsData: Skill[] = [
     category: "Programming",
     status: "used",
     description: "Primary language used for machine learning pipelines, local AI execution scripts, web APIs, and automation routines.",
-    projects: ["jarvis", "studymate", "network-anomaly", "fake-news"]
+    projects: ["jarvis", "studymate", "network-anomaly", "smartclass-room", "fake-news"]
   },
   {
     id: "java",
@@ -25,7 +25,7 @@ export const skillsData: Skill[] = [
     category: "Programming",
     status: "used",
     description: "Used for object-oriented systems design, backend services, and structured algorithms code.",
-    projects: ["smartclass-room"]
+    projects: []
   },
   {
     id: "javascript",
@@ -33,7 +33,7 @@ export const skillsData: Skill[] = [
     category: "Programming",
     status: "familiar",
     description: "Used for scripting, DOM interactions, client-side validation logic, and basic dynamic behaviors.",
-    projects: []
+    projects: ["smartclass-room"]
   },
   {
     id: "sql",
@@ -41,7 +41,7 @@ export const skillsData: Skill[] = [
     category: "Programming",
     status: "used",
     description: "Structured query language for managing relational data, indexing, and optimizing queries.",
-    projects: ["jarvis", "smartclass-room"]
+    projects: ["jarvis"]
   },
   {
     id: "html5",
@@ -207,7 +207,7 @@ export const skillsData: Skill[] = [
     category: "Backend & APIs",
     status: "used",
     description: "Asynchronous Python web framework used to configure low-latency local rest endpoints.",
-    projects: ["jarvis"]
+    projects: ["jarvis", "smartclass-room"]
   },
   {
     id: "nodejs",
@@ -223,7 +223,7 @@ export const skillsData: Skill[] = [
     category: "Backend & APIs",
     status: "used",
     description: "Designing structured REST endpoints and request/response payloads.",
-    projects: ["jarvis", "smartclass-room"]
+    projects: ["jarvis"]
   },
   {
     id: "sqlalchemy",
@@ -255,7 +255,7 @@ export const skillsData: Skill[] = [
     category: "Backend & APIs",
     status: "used",
     description: "Designing, mapping, testing, and debugging interface pathways connecting backend features.",
-    projects: ["jarvis", "smartclass-room"]
+    projects: ["jarvis"]
   },
   
   // Web Development
@@ -289,7 +289,7 @@ export const skillsData: Skill[] = [
     category: "Web Development",
     status: "used",
     description: "Consuming API services to display dynamic telemetry dashboard widgets.",
-    projects: ["jarvis", "smartclass-room"]
+    projects: ["jarvis"]
   },
 
   // Development Tools

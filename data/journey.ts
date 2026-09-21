@@ -39,6 +39,7 @@ export const journeyData: JourneyYear[] = [
     ],
     built: [
       "StudyMate: AI-powered learning assistant focused on organizing study materials and providing AI-assisted academic support",
+      "SmartClass Room: Student activity monitoring system for online classes using computer vision",
       "Desktop simulation programs",
       "Database-backed records systems",
       "Local helper automation scripts"
