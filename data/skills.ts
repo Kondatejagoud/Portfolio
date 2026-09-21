@@ -17,7 +17,7 @@ export const skillsData: Skill[] = [
     category: "Programming",
     status: "used",
     description: "Primary language used for machine learning pipelines, local AI execution scripts, web APIs, and automation routines.",
-    projects: ["jarvis", "network-anomaly", "fake-news"]
+    projects: ["jarvis", "studymate", "network-anomaly", "fake-news"]
   },
   {
     id: "java",
@@ -25,7 +25,7 @@ export const skillsData: Skill[] = [
     category: "Programming",
     status: "used",
     description: "Used for object-oriented systems design, backend services, and structured algorithms code.",
-    projects: ["studymate", "smartclass-room"]
+    projects: ["smartclass-room"]
   },
   {
     id: "javascript",
@@ -41,7 +41,7 @@ export const skillsData: Skill[] = [
     category: "Programming",
     status: "used",
     description: "Structured query language for managing relational data, indexing, and optimizing queries.",
-    projects: ["jarvis", "studymate", "smartclass-room"]
+    projects: ["jarvis", "smartclass-room"]
   },
   {
     id: "html5",
@@ -223,7 +223,7 @@ export const skillsData: Skill[] = [
     category: "Backend & APIs",
     status: "used",
     description: "Designing structured REST endpoints and request/response payloads.",
-    projects: ["jarvis", "studymate", "smartclass-room"]
+    projects: ["jarvis", "smartclass-room"]
   },
   {
     id: "sqlalchemy",
@@ -239,7 +239,7 @@ export const skillsData: Skill[] = [
     category: "Backend & APIs",
     status: "used",
     description: "Self-contained, local database engine used for application data persistence.",
-    projects: ["jarvis", "studymate"]
+    projects: ["jarvis"]
   },
   {
     id: "async-python",
@@ -255,9 +255,9 @@ export const skillsData: Skill[] = [
     category: "Backend & APIs",
     status: "used",
     description: "Designing, mapping, testing, and debugging interface pathways connecting backend features.",
-    projects: ["jarvis", "studymate", "smartclass-room"]
+    projects: ["jarvis", "smartclass-room"]
   },
-
+  
   // Web Development
   {
     id: "html",
@@ -289,7 +289,7 @@ export const skillsData: Skill[] = [
     category: "Web Development",
     status: "used",
     description: "Consuming API services to display dynamic telemetry dashboard widgets.",
-    projects: ["jarvis", "studymate", "smartclass-room"]
+    projects: ["jarvis", "smartclass-room"]
   },
 
   // Development Tools
