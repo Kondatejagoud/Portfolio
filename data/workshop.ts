@@ -83,8 +83,8 @@ export const workshopActivities: WorkshopActivity[] = [
     id: "note-6",
     projectId: "studymate",
     category: "technical-note",
-    title: "STUDY WORKFLOW DESIGN",
-    description: "Optimizes multi-table indexing to connect course details, schedules, and flashcard queues dynamically.",
+    title: "AI LEARNING ASSISTANT WORKFLOW",
+    description: "Organizes study materials and integrates AI-assisted note generation into a unified student workflow.",
   },
 
   // 3. Lessons (Category: 'lesson')
@@ -113,8 +113,8 @@ export const workshopActivities: WorkshopActivity[] = [
     id: "lesson-4",
     projectId: "studymate",
     category: "lesson",
-    title: "User-Focused Design",
-    description: "User-focused systems need a simple workflow in addition to technical functionality.",
+    title: "AI Workflow Integration",
+    description: "Designing AI-assisted user workflows around real student problems makes learning materials easier to understand and revise.",
   },
   {
     id: "lesson-5",
@@ -122,48 +122,6 @@ export const workshopActivities: WorkshopActivity[] = [
     category: "lesson",
     title: "Monitoring Signals",
     description: "Monitoring systems require careful handling of events, activity signals and data flow.",
-  },
-
-  // 4. Broken Things / Troubleshooting logs (Category: 'problem')
-  {
-    id: "problem-1",
-    projectId: "jarvis",
-    category: "problem",
-    title: "Memory retrieval returned irrelevant context",
-    description: "Simple keyword queries were pulling unrelated facts from the vector DB. Resolved by calibrating similarity thresholds and pre-filtering meta-keys.",
-    status: "RESOLVED"
-  },
-  {
-    id: "problem-2",
-    projectId: "network-anomaly",
-    category: "problem",
-    title: "Clustering behavior changed significantly with preprocessing",
-    description: "DBSCAN spatial density calculations timed out. Resolved by running PCA dimensionality reduction prior to clustering.",
-    status: "RESOLVED"
-  },
-  {
-    id: "problem-3",
-    projectId: "fake-news",
-    category: "problem",
-    title: "Evidence retrieval needed fallback handling",
-    description: "Remote Wikidata queries timed out. Resolved by caching Wikidata responses in a lightweight cache database.",
-    status: "RESOLVED"
-  },
-  {
-    id: "problem-4",
-    projectId: "smartclass-room",
-    category: "problem",
-    title: "Activity monitoring required more careful event handling",
-    description: "Heavy aggregate attendance packets choked WebSocket connections. Resolved by using differential updates.",
-    status: "RESOLVED"
-  },
-  {
-    id: "problem-5",
-    projectId: "studymate",
-    category: "problem",
-    title: "Workflow design needed simplification",
-    description: "Database queries suffered from high latency. Resolved by redesigning index structures.",
-    status: "RESOLVED"
   },
 
   // 5. Technologies being explored / currently learning (Category: 'learning')

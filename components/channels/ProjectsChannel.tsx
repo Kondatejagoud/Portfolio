@@ -117,11 +117,13 @@ export default function ProjectsChannel({
         );
       case 'studymate':
         return (
-          <svg className="w-full h-full text-cyan-400/25" viewBox="0 0 100 100" fill="none">
-            <rect x="20" y="25" width="60" height="50" rx="4" stroke="currentColor" strokeWidth="1.5" />
-            <line x1="20" y1="38" x2="80" y2="38" stroke="currentColor" strokeWidth="1" />
-            <circle cx="35" cy="56" r="3" fill="currentColor" />
-            <circle cx="65" cy="56" r="3" fill="currentColor" />
+          <svg className="w-full h-full text-cyan-400/30" viewBox="0 0 100 100" fill="none">
+            <rect x="25" y="20" width="50" height="60" rx="4" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="33" y1="32" x2="67" y2="32" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="33" y1="44" x2="57" y2="44" stroke="currentColor" strokeWidth="1" />
+            <line x1="33" y1="54" x2="67" y2="54" stroke="currentColor" strokeWidth="1" />
+            <line x1="33" y1="64" x2="50" y2="64" stroke="currentColor" strokeWidth="1" />
+            <circle cx="63" cy="64" r="3" fill="currentColor" />
           </svg>
         );
       default:

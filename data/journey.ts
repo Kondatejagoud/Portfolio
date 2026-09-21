@@ -38,6 +38,7 @@ export const journeyData: JourneyYear[] = [
       "Asynchronous concepts"
     ],
     built: [
+      "StudyMate: AI-powered learning assistant focused on organizing study materials and providing AI-assisted academic support",
       "Desktop simulation programs",
       "Database-backed records systems",
       "Local helper automation scripts"
