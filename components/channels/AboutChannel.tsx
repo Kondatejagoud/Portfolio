@@ -1,167 +1,151 @@
 'use client';
 
 import React from 'react';
-import { User, Target, Cpu, BookOpen, Layers } from 'lucide-react';
+import { Layers, Compass, Activity } from 'lucide-react';
 
 export default function AboutChannel() {
-  const interests = [
-    {
-      title: "ARTIFICIAL INTELLIGENCE",
-      desc: "Building practical AI systems and exploring how models can interact with tools, memory and real-world applications."
-    },
-    {
-      title: "BACKEND ENGINEERING",
-      desc: "Designing APIs, services and backend systems that connect different parts of an application."
-    },
-    {
-      title: "MACHINE LEARNING",
-      desc: "Working with data, algorithms and models to identify patterns and solve practical problems."
-    },
-    {
-      title: "SYSTEM ARCHITECTURE",
-      desc: "Understanding how individual components become reliable and maintainable systems."
-    },
-    {
-      title: "AUTOMATION",
-      desc: "Exploring ways software and intelligent systems can reduce repetitive work."
-    },
-    {
-      title: "CONTINUOUS LEARNING",
-      desc: "Currently expanding knowledge across AI, backend engineering and system design."
-    }
+  const focusAreas = [
+    { title: "AI SYSTEMS", desc: "Building local models integration, vector indexes, and reasoning pipelines." },
+    { title: "MACHINE LEARNING", desc: "Clustering algorithms, feature scaling, and statistical evaluation parameters." },
+    { title: "BACKEND ENGINEERING", desc: "Designing robust web APIs, async routes, and structured database layers." },
+    { title: "SOFTWARE DEVELOPMENT", desc: "Understanding low-level hardware up to modern persistent applications." }
   ];
 
-  const philosophy = [
-    { step: "01", name: "UNDERSTAND", desc: "Understand the problem before building the solution." },
-    { step: "02", name: "BUILD", desc: "Turn the idea into something that actually works." },
-    { step: "03", name: "TEST", desc: "Find where the system breaks." },
-    { step: "04", name: "IMPROVE", desc: "Refactor, test and make it better." },
-    { step: "05", name: "REPEAT", desc: "There is always another layer worth understanding." }
+  const buildPhilosophy = [
+    { step: "01", name: "UNDERSTAND", desc: "Deconstruct the problem fully before planning code." },
+    { step: "02", name: "BUILD", desc: "Implement clean, reliable logic from the ground up." },
+    { step: "03", name: "TEST", desc: "Iterate and aggressively discover system limits." },
+    { step: "04", name: "IMPROVE", desc: "Refactor bottlenecks and optimize structural paths." }
   ];
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col gap-8 font-mono select-text selection:bg-[#00D9FF] selection:text-black">
-      {/* Title Header */}
-      <div className="border-b border-zinc-800/80 pb-4 select-none">
-        <span className="text-[10px] text-[#8D969D] uppercase tracking-widest block mb-1">
-          CH 01 // ON AIR PROFILE
-        </span>
-        <h1 className="text-xl md:text-3xl font-extrabold text-[#E6E8EA] tracking-wider uppercase">
-          WHO IS KONDA TEJA?
-        </h1>
+    <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col gap-10 font-sans select-text selection:bg-[#00D9FF] selection:text-black">
+      
+      {/* 1. Page Title Header */}
+      <div className="border-b border-zinc-900 pb-4 select-none flex flex-col md:flex-row md:justify-between md:items-end gap-2">
+        <div>
+          <span className="font-mono text-[9px] text-[#8d969d] uppercase tracking-widest block mb-1">
+            CH 01 // ON AIR PROFILE
+          </span>
+          <h1 className="text-2xl md:text-3xl font-black text-[#E6E8EA] tracking-wide uppercase">
+            WHO IS KONDA TEJA?
+          </h1>
+        </div>
+        <div className="flex items-center gap-2 bg-[#0d1217]/50 border border-zinc-900 px-3 py-1 rounded-md text-[9px] text-cyan-400 font-mono font-bold select-none w-max">
+          <Activity size={10} className="animate-pulse" />
+          <span>STATUS // ACTIVE COMPILATION</span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Profile Card (ON AIR PROFILE) - takes 5 cols on lg */}
-        <div className="lg:col-span-5 bg-[#0D1013] border border-zinc-800 rounded-lg p-5 flex flex-col gap-5 select-none">
-          <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
-            <span className="text-xs font-bold text-[#00D9FF] tracking-wider uppercase flex items-center gap-2">
-              <User size={14} className="text-[#00D9FF]" />
-              ON AIR PROFILE
-            </span>
-            <div className="flex items-center gap-1.5 bg-green-950/40 border border-green-800/40 px-2 py-0.5 rounded text-green-400 text-[10px] font-bold">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              ONLINE
-            </div>
+      {/* 2. Main Hero Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        {/* Left Side: Brief Personal Identity Summary */}
+        <div className="lg:col-span-7 flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-[#E6E8EA] leading-none uppercase">
+              KONDA TEJA
+            </h2>
+            <p className="text-[#00D9FF] font-mono text-xs md:text-sm font-bold tracking-widest uppercase mt-1">
+              COMPUTER SCIENCE STUDENT // AI • SOFTWARE • SYSTEMS
+            </p>
           </div>
 
-          <div className="flex flex-col gap-4 text-xs md:text-sm">
-            <div className="flex flex-col gap-1">
-              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">NAME</span>
-              <span className="text-[#E6E8EA] font-semibold">KONDA TEJA</span>
-            </div>
+          <p className="text-base md:text-lg text-zinc-300 leading-relaxed max-w-2xl font-light">
+            I enjoy understanding how systems work, then building my own versions of them.
+          </p>
+
+          <div className="flex flex-col gap-3 font-sans text-sm md:text-base text-[#8D969D] leading-relaxed max-w-2xl border-t border-zinc-900/60 pt-4">
+            <p>
+              I explore software by taking it apart, analyzing the components underneath, and stitching what I learn back into working systems. My work covers autonomous local AI assistants, clustering anomaly detection models, database index utilities, and information classification tools.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side: Abstract animated SVG network graphics constellation */}
+        <div className="lg:col-span-5 flex justify-center items-center select-none relative h-64 md:h-72 w-full glass-l2 rounded-xl overflow-hidden border border-zinc-900">
+          <div className="absolute inset-0 bg-radial-gradient from-cyan-950/10 via-transparent to-transparent opacity-60" />
+          <svg className="w-5/6 h-5/6 text-[#00D9FF]/20" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Connection Lines */}
+            <line x1="100" y1="100" x2="40" y2="60" stroke="currentColor" strokeWidth="0.5" className="animate-pulse" />
+            <line x1="100" y1="100" x2="160" y2="60" stroke="currentColor" strokeWidth="0.5" />
+            <line x1="100" y1="100" x2="100" y2="160" stroke="currentColor" strokeWidth="0.5" />
+            <line x1="40" y1="60" x2="160" y2="60" stroke="currentColor" strokeWidth="0.25" strokeDasharray="3 3" />
+            <line x1="40" y1="60" x2="100" y2="160" stroke="currentColor" strokeWidth="0.25" />
+            <line x1="160" y1="60" x2="100" y2="160" stroke="currentColor" strokeWidth="0.25" />
             
-            <div className="flex flex-col gap-1">
-              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">ROLE</span>
-              <span className="text-[#E6E8EA] font-semibold">COMPUTER SCIENCE STUDENT</span>
-            </div>
+            {/* Core Node */}
+            <circle cx="100" cy="100" r="8" fill="#080A0C" stroke="#00D9FF" strokeWidth="2" />
+            <circle cx="100" cy="100" r="14" stroke="#00D9FF" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" style={{ transformOrigin: 'center', animationDuration: '10s' }} />
 
-            <div className="flex flex-col gap-1">
-              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">FOCUS</span>
-              <span className="text-[#00D9FF] font-semibold uppercase">AI • SOFTWARE • SYSTEMS</span>
-            </div>
+            {/* Orbiting Nodes */}
+            <circle cx="40" cy="60" r="5" fill="#080A0C" stroke="#00D9FF" strokeWidth="1.5" />
+            <circle cx="160" cy="60" r="5" fill="#080A0C" stroke="#00D9FF" strokeWidth="1.5" />
+            <circle cx="100" cy="160" r="5" fill="#080A0C" stroke="#00D9FF" strokeWidth="1.5" />
 
-            <div className="flex flex-col gap-1">
-              <span className="text-[9px] text-[#8D969D] uppercase tracking-wider">STATUS</span>
-              <span className="text-[#E6E8EA] flex items-center gap-2 font-semibold">
-                <span className="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 absolute" />
-                <span className="pl-3.5">● BUILDING</span>
-              </span>
-            </div>
+            {/* Inner Details */}
+            <circle cx="100" cy="100" r="2" fill="#00D9FF" />
+          </svg>
+          <div className="absolute bottom-3 right-4 font-mono text-[8px] text-zinc-550 uppercase tracking-widest">
+            Identity constellation map // active
           </div>
         </div>
 
-        {/* Narrative bio and details - takes 7 cols on lg */}
-        <div className="lg:col-span-7 flex flex-col gap-8">
-          {/* Signature Quote Statement */}
-          <div className="bg-[#0D1013] border-l-2 border-[#00D9FF] p-4 text-[#E6E8EA] text-sm md:text-base leading-relaxed font-black">
-            &ldquo;I don&apos;t just want to use a system.<br/>
-            I want to understand what&apos;s happening underneath it.&rdquo;
-          </div>
-
-          {/* Transmission Synopsis (Bio) */}
-          <div className="flex flex-col gap-3 font-sans text-sm md:text-base text-[#8D969D] leading-relaxed">
-            <span className="text-[10px] text-[#00D9FF] tracking-wider uppercase font-mono font-bold flex items-center gap-1.5 select-none">
-              <Target size={14} />
-              TRANSMISSION SYNOPSIS
-            </span>
-            <p>
-              I&apos;m Konda Teja, a Computer Science student who learns by building. I like taking ideas apart, understanding what happens underneath, and turning what I learn into working systems.
-            </p>
-            <p>
-              I&apos;ve built projects ranging from AI assistants and machine-learning pipelines to student-focused systems and information-analysis tools. I&apos;m particularly interested in how individual components come together to create useful and reliable software.
-            </p>
-            <p>
-              I&apos;m still learning, still experimenting, and still improving. Every project gives me something new to understand, rebuild, or refine.
-            </p>
-          </div>
-
-          {/* Build Philosophy Section */}
-          <div className="flex flex-col gap-4 select-none">
-            <span className="text-[10px] text-[#00D9FF] tracking-wider uppercase font-bold flex items-center gap-1.5">
-              <Layers size={14} />
-              BUILD PHILOSOPHY
-            </span>
-            <div className="flex flex-col gap-2.5 bg-[#0D1013]/50 p-4 border border-zinc-800/40 rounded-lg">
-              {philosophy.map((step, idx) => (
-                <div key={idx} className="flex gap-4 items-start text-xs border-b border-zinc-900/60 pb-2.5 last:border-0 last:pb-0">
-                  <span className="text-[#00D9FF] font-black">{step.step}</span>
-                  <div className="flex flex-col">
-                    <span className="text-[#E6E8EA] font-extrabold tracking-wide">{step.name}</span>
-                    <span className="text-[#8D969D] font-sans mt-0.5">{step.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Interests Grid */}
-          <div className="flex flex-col gap-4 select-none">
-            <span className="text-[10px] text-[#00D9FF] tracking-wider uppercase font-bold flex items-center gap-1.5">
-              <Cpu size={14} />
-              CURRENT INTERESTS
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {interests.map((interest, idx) => (
-                <div 
-                  key={idx} 
-                  className="bg-[#0D1013] border border-zinc-800 rounded p-4 flex flex-col gap-1.5 hover:border-[#00D9FF]/40 transition-all group"
-                >
-                  <span className="text-xs font-bold text-[#E6E8EA] flex items-center gap-2">
-                    <BookOpen size={12} className="text-[#8D969D] group-hover:text-[#00D9FF] transition-colors" />
-                    {interest.title}
-                  </span>
-                  <p className="text-[11px] text-[#8D969D] font-sans leading-relaxed">
-                    {interest.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-        </div>
       </div>
+
+      {/* 3. Deep Visual Division Panel */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-t border-zinc-900 pt-8">
+        
+        {/* Left Side: Focus Areas (L2 Glass blocks) */}
+        <div className="lg:col-span-6 flex flex-col gap-4">
+          <span className="font-mono text-[10px] text-[#00D9FF] tracking-wider uppercase font-bold flex items-center gap-1.5 select-none">
+            <Compass size={14} />
+            DIAGNOSTIC FOCUS AREAS
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {focusAreas.map((area, idx) => (
+              <div 
+                key={idx} 
+                className="glass-l2 rounded-lg p-4 flex flex-col gap-1.5 transition-all hover:border-[#00D9FF]/20 select-none"
+              >
+                <span className="text-xs font-black tracking-wider text-[#E6E8EA] uppercase">
+                  {area.title}
+                </span>
+                <p className="text-[11px] text-[#8D969D] leading-relaxed">
+                  {area.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Side: Build Philosophy (Timeline stack) */}
+        <div className="lg:col-span-6 flex flex-col gap-4">
+          <span className="font-mono text-[10px] text-[#00D9FF] tracking-wider uppercase font-bold flex items-center gap-1.5 select-none">
+            <Layers size={14} />
+            TRANSMISSION CORE PHILOSOPHY
+          </span>
+          <div className="flex flex-col gap-3 bg-[#0d1217]/50 border border-zinc-900 rounded-lg p-4 select-none">
+            {buildPhilosophy.map((phil, idx) => (
+              <div key={idx} className="flex gap-4 items-start border-b border-zinc-900/60 pb-3 last:border-0 last:pb-0">
+                <span className="font-mono text-xs font-black text-[#00D9FF]">
+                  {phil.step}
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-xs font-extrabold text-[#E6E8EA] tracking-wide uppercase">
+                    {phil.name}
+                  </span>
+                  <span className="text-[11px] text-[#8D969D] mt-0.5 font-light">
+                    {phil.desc}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
     </div>
   );
 }

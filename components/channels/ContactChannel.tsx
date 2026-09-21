@@ -61,7 +61,6 @@ export default function ContactChannel() {
         "OPENING CLIENT-SIDE MAIL INTEGRATOR...",
       ];
 
-      // Simulate step-by-step logs for telemetry aesthetic
       for (let i = 0; i < logSteps.length; i++) {
         await new Promise(resolve => setTimeout(resolve, 300));
         setLogs(prev => [...prev, `[LOG] ${logSteps[i]}`]);
@@ -69,14 +68,12 @@ export default function ContactChannel() {
 
       await new Promise(resolve => setTimeout(resolve, 200));
 
-      // Build genuine mailto trigger link
       const mailtoUrl = `mailto:${siteConfig.email}?subject=TEJA NETWORK Transmission from ${encodeURIComponent(
         formData.name
       )}&body=Sender Email: ${encodeURIComponent(formData.email)}%0A%0AMessage:%0A${encodeURIComponent(
         formData.message
       )}`;
 
-      // Open mail client
       window.location.href = mailtoUrl;
 
       setLogs(prev => [...prev, "[OK] TRANSMISSION COMPLETED. MAIL CLIENT DELEGATION SECURED."]);
@@ -89,39 +86,42 @@ export default function ContactChannel() {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-6 font-mono select-text selection:bg-[#00D9FF] selection:text-black">
+    <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col gap-10 font-sans select-text selection:bg-[#00D9FF] selection:text-black">
       
       {/* Channel Header */}
-      <div className="border-b border-zinc-800/80 pb-3 select-none">
-        <span className="text-[10px] text-[#8D969D] uppercase tracking-widest block mb-1">
+      <div className="border-b border-zinc-900 pb-4 select-none">
+        <span className="font-mono text-[9px] text-[#8D969D] uppercase tracking-widest block mb-1">
           CH 06 // OPEN CONNECTION
         </span>
-        <h1 className="text-xl md:text-2xl font-extrabold text-[#E6E8EA] tracking-wider uppercase">
+        <h1 className="text-2xl md:text-3xl font-black text-[#E6E8EA] tracking-wide uppercase">
           TRANSMIT SIGNAL
+          <span className="text-xs font-mono font-bold tracking-widest text-[#00D9FF] uppercase ml-3">
+            {"// OPEN CONNECTION"}
+          </span>
         </h1>
-        <p className="text-[11px] text-[#8D969D] font-sans leading-relaxed mt-1 max-w-lg select-text">
+        <p className="text-sm text-zinc-400 font-light leading-relaxed mt-2.5 max-w-xl">
           Have a project, opportunity, idea, or question? Open a connection and send a transmission.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Terminal Connection Form (Left Column, 7 cols on lg) */}
-        <div className="lg:col-span-7 bg-[#0D1013] border border-zinc-800/85 rounded-lg overflow-hidden flex flex-col">
-          {/* Window Header - Sanitized title */}
-          <div className="bg-[#101317] border-b border-zinc-800/80 px-4 py-2 flex justify-between items-center text-[10px] text-[#8D969D] select-none">
+        <div className="lg:col-span-7 glass-l2 border border-zinc-900 rounded-xl overflow-hidden flex flex-col">
+          {/* Window Header */}
+          <div className="bg-[#0D1013]/60 border-b border-zinc-900 px-5 py-3 flex justify-between items-center text-[9px] font-mono text-[#8D969D] select-none">
             <span className="flex items-center gap-2">
               <Terminal size={12} className="text-[#00D9FF]" />
               TRANSMISSION INTERFACE
             </span>
-            <span className="text-cyan-400 font-bold">OPEN CONNECTION // SECURE CHANNEL</span>
+            <span className="text-cyan-400 font-bold uppercase tracking-wider">OPEN CONNECTION // SECURE CHANNEL</span>
           </div>
 
-          <div className="p-4 md:p-5 flex flex-col gap-4">
+          <div className="p-5 flex flex-col gap-5">
             
             {/* Short Personal Prompt */}
-            <div className="text-xs text-zinc-300 font-sans leading-relaxed select-text border-b border-zinc-900 pb-3">
-              <span className="block font-mono text-[10px] font-bold text-[#00D9FF] uppercase tracking-wider mb-1">
+            <div className="text-xs md:text-sm text-zinc-300 leading-relaxed border-b border-zinc-900 pb-4">
+              <span className="block font-mono text-[9px] font-bold text-[#00D9FF] uppercase tracking-wider mb-1">
                 Open a connection.
               </span>
               I&apos;m interested in building useful software, learning from difficult problems, and connecting with people working on interesting ideas.
@@ -129,10 +129,10 @@ export default function ContactChannel() {
 
             {status !== 'SUCCESS' && status !== 'ERROR' ? (
               <form onSubmit={executeTransmission} className="flex flex-col gap-4">
-                <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-4 font-sans">
                   {/* Name Input */}
                   <div className="flex-1 flex flex-col gap-1.5">
-                    <label htmlFor="name-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold select-none">
+                    <label htmlFor="name-input" className="font-mono text-[9px] text-[#8D969D] uppercase tracking-wider font-extrabold select-none">
                       SENDER NAME
                     </label>
                     <input
@@ -143,13 +143,13 @@ export default function ContactChannel() {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="ENTER YOUR NAME..."
-                      className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text"
+                      className="bg-[#080A0C]/60 border border-zinc-900 rounded-lg p-3 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text font-light"
                     />
                   </div>
 
                   {/* Email Input */}
                   <div className="flex-1 flex flex-col gap-1.5">
-                    <label htmlFor="email-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold select-none">
+                    <label htmlFor="email-input" className="font-mono text-[9px] text-[#8D969D] uppercase tracking-wider font-extrabold select-none">
                       SENDER EMAIL
                     </label>
                     <input
@@ -160,14 +160,14 @@ export default function ContactChannel() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="ENTER YOUR EMAIL..."
-                      className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text"
+                      className="bg-[#080A0C]/60 border border-zinc-900 rounded-lg p-3 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all select-text font-light"
                     />
                   </div>
                 </div>
 
                 {/* Message Input */}
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message-input" className="text-[9px] text-[#8D969D] uppercase tracking-wider font-bold select-none">
+                <div className="flex flex-col gap-1.5 font-sans">
+                  <label htmlFor="message-input" className="font-mono text-[9px] text-[#8D969D] uppercase tracking-wider font-extrabold select-none">
                     SIGNAL PAYLOAD MESSAGE
                   </label>
                   <textarea
@@ -178,63 +178,63 @@ export default function ContactChannel() {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="WRITE YOUR MESSAGE..."
-                    className="bg-[#080A0C] border border-zinc-800 rounded p-2.5 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all resize-none select-text"
+                    className="bg-[#080A0C]/60 border border-zinc-900 rounded-lg p-3 text-xs text-[#E6E8EA] placeholder-zinc-700 focus:outline-none focus:border-[#00D9FF] transition-all resize-none select-text font-light"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={status === 'SENDING'}
-                  className={`w-full py-3 bg-[#080A0C] hover:bg-[#0D1013] border border-zinc-800 rounded hover:border-[#00D9FF] transition-all cursor-pointer font-bold text-xs text-[#E6E8EA] hover:text-[#00D9FF] flex items-center justify-center gap-2 ${
+                  className={`w-full py-3.5 bg-[#080A0C] hover:bg-zinc-900 border border-zinc-900 hover:border-[#00D9FF] rounded-lg transition-all cursor-pointer font-bold text-xs text-[#E6E8EA] hover:text-[#00D9FF] flex items-center justify-center gap-2 select-none ${
                     status === 'SENDING' ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                 >
                   <Send size={12} />
-                  <span>
+                  <span className="font-mono uppercase tracking-wider">
                     {status === 'SENDING' ? 'TRANSMITTING...' : 'SEND TRANSMISSION'}
                   </span>
                 </button>
               </form>
             ) : status === 'SUCCESS' ? (
               /* Success Telemetry Feedback */
-              <div className="flex flex-col items-center justify-center py-6 text-center gap-4 animate-fade-in select-text">
-                <CheckCircle2 size={40} className="text-[#00D9FF] animate-bounce" />
-                <div className="flex flex-col gap-1">
+              <div className="flex flex-col items-center justify-center py-8 text-center gap-4 animate-fade-in select-text">
+                <CheckCircle2 size={40} className="text-[#00D9FF] animate-pulse" />
+                <div className="flex flex-col gap-1 select-none">
                   <h2 className="text-sm font-extrabold text-[#E6E8EA]">
                     TRANSMISSION ROUTED.
                   </h2>
-                  <span className="text-xs text-[#00D9FF] font-bold">
+                  <span className="font-mono text-[9px] text-[#00D9FF] font-bold">
                     STATUS: DELEGATED TO MAIL CLIENT
                   </span>
                 </div>
-                <p className="text-xs text-[#8D969D] max-w-sm font-sans">
+                <p className="text-xs text-[#8D969D] max-w-sm leading-relaxed font-sans font-light">
                   Your local email client has been triggered to send this transmission. Direct email: <strong className="text-zinc-300 font-mono select-all font-bold">{siteConfig.email}</strong>
                 </p>
                 <button
                   onClick={() => setStatus('IDLE')}
-                  className="mt-2 px-4 py-2 bg-[#080A0C] border border-zinc-800 hover:border-zinc-700 rounded text-[10px] text-[#8D969D] hover:text-[#E6E8EA] cursor-pointer"
+                  className="mt-3 px-5 py-2.5 bg-[#080A0C] border border-zinc-900 hover:border-zinc-800 rounded-md font-mono text-[9px] text-[#8D969D] hover:text-[#E6E8EA] cursor-pointer uppercase font-bold"
                 >
                   OPEN NEW CONNECTION
                 </button>
               </div>
             ) : (
               /* Error telemetry message */
-              <div className="flex flex-col items-center justify-center py-6 text-center gap-4 animate-fade-in select-text">
+              <div className="flex flex-col items-center justify-center py-8 text-center gap-4 animate-fade-in select-text">
                 <AlertCircle size={40} className="text-red-500 animate-pulse" />
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 select-none">
                   <h2 className="text-sm font-extrabold text-[#E6E8EA] uppercase">
                     TRANSMISSION FAILED.
                   </h2>
-                  <span className="text-xs text-red-500 font-bold">
+                  <span className="font-mono text-[9px] text-red-500 font-bold">
                     STATUS: DISPATCH ERROR
                   </span>
                 </div>
-                <p className="text-xs text-[#8D969D] max-w-sm font-sans">
+                <p className="text-xs text-[#8D969D] max-w-sm leading-relaxed font-sans font-light">
                   Unable to establish connection. Please transmit directly via your local mail system to: <strong className="text-zinc-300 font-mono select-all font-bold">{siteConfig.email}</strong>
                 </p>
                 <button
                   onClick={() => setStatus('IDLE')}
-                  className="mt-2 px-4 py-2 bg-[#080A0C] border border-zinc-800 hover:border-zinc-700 rounded text-[10px] text-[#8D969D] hover:text-[#E6E8EA] cursor-pointer"
+                  className="mt-3 px-5 py-2.5 bg-[#080A0C] border border-zinc-900 hover:border-zinc-800 rounded-md font-mono text-[9px] text-[#8D969D] hover:text-[#E6E8EA] cursor-pointer uppercase font-bold"
                 >
                   RETRY CONNECTION
                 </button>
@@ -243,7 +243,7 @@ export default function ContactChannel() {
 
             {/* Terminal logs block */}
             {logs.length > 0 && (
-              <div className="bg-[#080A0C] border border-zinc-900 rounded p-3 text-[10px] text-zinc-550 font-mono flex flex-col gap-1 max-h-32 overflow-y-auto select-text">
+              <div className="bg-[#080A0C] border border-zinc-950 rounded-lg p-3.5 text-[9.5px] text-zinc-600 font-mono flex flex-col gap-1 max-h-32 overflow-y-auto select-text border-l-2 border-l-[#00D9FF]">
                 {logs.map((log, idx) => (
                   <div key={idx} className={log.startsWith('[OK]') ? 'text-[#00D9FF]' : log.startsWith('[ERR]') ? 'text-red-500' : ''}>
                     {log}
@@ -259,7 +259,7 @@ export default function ContactChannel() {
           
           {/* Direct Connections List */}
           <div className="flex flex-col gap-3.5">
-            <span className="text-[10px] text-[#00D9FF] tracking-wider uppercase font-bold select-none">
+            <span className="font-mono text-[9.5px] text-[#00D9FF] tracking-wider uppercase font-bold select-none">
               DIRECT CONNECTIONS
             </span>
 
@@ -270,24 +270,24 @@ export default function ContactChannel() {
                   href={siteConfig.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  className="flex items-center justify-between p-4 bg-zinc-900/40 border border-zinc-900 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-xl transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
                   aria-label="Open Konda Teja's GitHub profile in a new tab"
                 >
                   <div className="flex items-center gap-3">
                     <GithubIcon className="w-[18px] h-[18px]" />
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-left">
                       <span className="text-xs">GITHUB</span>
-                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase mt-0.5">
                         github.com/Kondatejagoud
                       </span>
                     </div>
                   </div>
-                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                  <span className="text-[9.5px] group-hover:text-[#00D9FF] font-bold">
                     VIEW SOURCE
                   </span>
                 </a>
               ) : (
-                <div className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-900/60 text-[#8D969D]/40 opacity-60 rounded-lg text-xs font-mono uppercase font-bold">
+                <div className="flex items-center justify-between p-4 bg-zinc-900/20 border border-zinc-950 text-zinc-650 opacity-60 rounded-xl text-xs font-mono uppercase font-bold">
                   <div className="flex items-center gap-3">
                     <GithubIcon className="w-[18px] h-[18px]" />
                     <span>GITHUB</span>
@@ -302,32 +302,27 @@ export default function ContactChannel() {
                   href={siteConfig.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  className="flex items-center justify-between p-4 bg-zinc-900/40 border border-zinc-900 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-xl transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
                   aria-label="Open Konda Teja's LinkedIn profile in a new tab"
                 >
                   <div className="flex items-center gap-3">
                     <LinkedinIcon className="w-[18px] h-[18px]" />
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-left">
                       <span className="text-xs">LINKEDIN</span>
-                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
-                        linkedin.com/in/konda-teja
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase mt-0.5">
+                        linkedin.com/in/kondateja06
                       </span>
                     </div>
                   </div>
-                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                  <span className="text-[9.5px] group-hover:text-[#00D9FF] font-bold">
                     CONNECT
                   </span>
                 </a>
               ) : (
-                <div className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-900/60 text-[#8D969D]/40 opacity-60 rounded-lg text-xs font-mono uppercase font-bold">
+                <div className="flex items-center justify-between p-4 bg-zinc-900/20 border border-zinc-955 text-zinc-650 opacity-60 rounded-xl text-xs font-mono uppercase font-bold">
                   <div className="flex items-center gap-3">
                     <LinkedinIcon className="w-[18px] h-[18px]" />
-                    <div className="flex flex-col">
-                      <span>LINKEDIN</span>
-                      <span className="text-[9.5px] text-[#8D969D]/30 font-normal lowercase">
-                        {"// not configured"}
-                      </span>
-                    </div>
+                    <span>LINKEDIN</span>
                   </div>
                   <span className="text-[9px]">NOT CONFIGURED</span>
                 </div>
@@ -337,24 +332,24 @@ export default function ContactChannel() {
               {siteConfig.email ? (
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  className="flex items-center justify-between p-4 bg-zinc-900/40 border border-zinc-900 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-xl transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
                   aria-label="Open email client to message Konda Teja"
                 >
                   <div className="flex items-center gap-3">
                     <Terminal size={18} className="text-[#8D969D] group-hover:text-[#00D9FF]" />
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-left">
                       <span className="text-xs">EMAIL Channel</span>
-                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase mt-0.5">
                         {siteConfig.email}
                       </span>
                     </div>
                   </div>
-                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                  <span className="text-[9.5px] group-hover:text-[#00D9FF] font-bold">
                     SEND EMAIL
                   </span>
                 </a>
               ) : (
-                <div className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-900/60 text-[#8D969D]/40 opacity-60 rounded-lg text-xs font-mono uppercase font-bold">
+                <div className="flex items-center justify-between p-4 bg-zinc-900/20 border border-zinc-950 text-zinc-650 opacity-60 rounded-xl text-xs font-mono uppercase font-bold">
                   <div className="flex items-center gap-3">
                     <Terminal size={18} />
                     <span>EMAIL</span>
@@ -363,25 +358,25 @@ export default function ContactChannel() {
                 </div>
               )}
 
-              {/* Resume Link - Hides if unconfigured, as requested */}
+              {/* Resume Link */}
               {siteConfig.resume && (
                 <a
                   href={siteConfig.resume}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 bg-[#0D1013] border border-zinc-800 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-lg transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
+                  className="flex items-center justify-between p-4 bg-zinc-900/40 border border-zinc-900 hover:border-[#00D9FF] text-[#E6E8EA] hover:text-[#00D9FF] rounded-xl transition-all text-xs font-mono uppercase font-bold group cursor-pointer"
                   aria-label="View Konda Teja's resume in a new tab"
                 >
                   <div className="flex items-center gap-3">
                     <FileDown size={18} />
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-left">
                       <span className="text-xs">RESUME</span>
-                      <span className="text-[9px] text-[#8D969D] font-normal uppercase">
+                      <span className="text-[9px] text-[#8D969D] font-normal uppercase mt-0.5">
                         PDF DOCUMENT
                       </span>
                     </div>
                   </div>
-                  <span className="text-[9px] group-hover:text-[#00D9FF]">
+                  <span className="text-[9.5px] group-hover:text-[#00D9FF] font-bold">
                     VIEW RESUME
                   </span>
                 </a>
@@ -390,14 +385,14 @@ export default function ContactChannel() {
           </div>
 
           {/* Connection Status Board */}
-          <div className="flex flex-col gap-3.5 select-none">
-            <span className="text-[10px] text-[#8D969D] tracking-wider uppercase font-bold">
+          <div className="flex flex-col gap-3.5 select-none font-mono">
+            <span className="text-[9.5px] text-[#8D969D] tracking-wider uppercase font-bold">
               CONNECTION STATUS
             </span>
-            <div className="bg-[#0D1013] border border-zinc-900 p-4 rounded-lg flex flex-col gap-2.5 text-xs text-zinc-300">
+            <div className="glass-l2 border border-zinc-900 p-4.5 rounded-xl flex flex-col gap-3 text-xs text-zinc-300">
               <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
                 <span>EMAIL CHANNEL</span>
-                <span className={siteConfig.email ? 'text-green-400' : 'text-zinc-650'}>
+                <span className={siteConfig.email ? 'text-green-400 font-bold' : 'text-zinc-650'}>
                   {siteConfig.email ? '● AVAILABLE' : '● OFFLINE'}
                 </span>
               </div>
